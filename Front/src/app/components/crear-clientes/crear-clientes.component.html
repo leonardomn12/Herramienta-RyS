@@ -1,0 +1,43 @@
+<div class="container my-2">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">{{titulo | uppercase}}</span>
+                    <form class="mt-3" [formGroup]="clientesForm" (ngSubmit)="agregarRegistro()">
+                        <div class="mb-3">
+                            <input type="text" formControlName="nombre_cliente" class="form-control form-control-lg" placeholder="Cliente">
+                            <div class="text-danger" *ngIf="clientesForm.get('nombre_cliente').hasError('required') && clientesForm.get('nombre_cliente').touched">
+                                <span>El nombre del cliente <strong>es obligatorio</strong></span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" formControlName="nombre_encargado" class="form-control form-control-lg" placeholder="Nombre del encargado de compras">
+                            <div class="text-danger" *ngIf="clientesForm.get('nombre_encargado').hasError('required') && clientesForm.get('nombre_encargado').touched">
+                                <span>El nombre del encargado <strong>es obligatorio</strong></span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" formControlName="correo" class="form-control form-control-lg" placeholder="Correo">
+                            <div class="text-danger" *ngIf="clientesForm.get('correo').hasError('required') && clientesForm.get('correo').touched">
+                                <span>El correo <strong>es obligatorio</strong></span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" formControlName="celular" class="form-control form-control-lg" placeholder="Celular">
+                            <div class="text-danger" *ngIf="clientesForm.get('celular').hasError('required') && clientesForm.get('celular').touched">
+                                <span>El celular <strong>es obligatorio</strong></span>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <button class="btn btn-secondary btn-lg float-start" routerLink="/clientes">VOLVER</button>
+                            <button type="submit" class="btn btn-danger btn-lg float-end" [disabled]="clientesForm.invalid">CREAR</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

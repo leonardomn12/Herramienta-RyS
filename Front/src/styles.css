@@ -1,0 +1,62 @@
+/* You can add global styles to this file, and also import other style files */
+.btn-primary{
+    background-color: #E20E17 !important;
+    border-color: #BFBDBE !important;
+    color: #ffffff !important;
+    transition: 0.5s !important;
+}
+
+.btn-primary:hover{
+    background-color: #ffffff !important;
+    border-color: #E20E17 !important;
+    color: #E20E17 !important;
+    transition: 0.5s;
+}
+
+/* Inicio de sesion*/
+
+.loginTitle{    
+    font-family: 'PT Sans', sans-serif;
+    font-size:2rem;
+    color: #000;
+}
+
+.loginContainer{
+    margin-top: 110px;
+    background-color:#fff;
+    border-radius: 0.3em;
+    padding: 4vh 4vh;
+}
+
+body{
+    background-color: #E20E17 !important;
+}
+
+.loginImage{
+    display: flex;
+    justify-content: center !important;
+}
+
+.login-logo{
+    height: 10vh;
+    width: 30vh;
+}
+
+.signupContainer{
+    margin-top: 50px;
+    background-color:#ffffff;
+    border-radius: 0.3em;
+    padding: 4vh 4vh;
+}
+
+.signupTitle{
+    font-family: 'PT Sans', sans-serif !important;
+    font-size:2rem;
+    color: #000;
+}
+
+/*Tablas*/
+
+.titulo{
+    font-size: 1.8rem;
+}
