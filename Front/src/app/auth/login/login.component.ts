@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
+import { ToastrService } from 'ngx-toastr';
 import { AppServiceService } from 'src/app/services/app-service.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { AppServiceService } from 'src/app/services/app-service.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AppServiceService, private router: Router) { }
+  constructor(private authService: AppServiceService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -18,6 +19,9 @@ export class LoginComponent implements OnInit {
   onLogin(form): void{
     this.authService.login(form.value).subscribe(res=>{
       this.router.navigateByUrl('/inicio');
+    }, error=>{
+      this.toastr.error('Usuario y/o contraseña incorrectos', 'Inicio de sesión fallido')
+      console.log(error);
     })
   }
 }
