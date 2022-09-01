@@ -26,9 +26,9 @@
                           <tr *ngFor="let junio of listJunio">
                             <th>{{junio.nombre_cliente}}</th>
                             <th>{{junio.telefono_cliente}}</th>
-                            <th>{{junio.ultima_fecha_compra}}</th>
+                            <th>{{junio.ultima_fecha_compra | date: "yyyy-MM-dd"}}</th>
                             <th>{{junio.producto}}</th>
-                            <th>{{junio.ultima_fecha_llamada}}</th>
+                            <th>{{junio.ultima_fecha_llamada | date: "yyyy-MM-dd"}}</th>
                             <th>{{junio.nombre_encargado}}</th>
                             <th>{{junio.resultado}}</th>
                             <th>{{junio.comentarios}}</th>

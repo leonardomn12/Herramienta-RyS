@@ -26,9 +26,9 @@
                           <tr *ngFor="let febrero of listFebrero">
                             <th>{{febrero.nombre_cliente}}</th>
                             <th>{{febrero.telefono_cliente}}</th>
-                            <th>{{febrero.ultima_fecha_compra}}</th>
+                            <th>{{febrero.ultima_fecha_compra | date: "yyyy-MM-dd"}}</th>
                             <th>{{febrero.producto}}</th>
-                            <th>{{febrero.ultima_fecha_llamada}}</th>
+                            <th>{{febrero.ultima_fecha_llamada | date: "yyyy-MM-dd"}}</th>
                             <th>{{febrero.nombre_encargado}}</th>
                             <th>{{febrero.resultado}}</th>
                             <th>{{febrero.comentarios}}</th>

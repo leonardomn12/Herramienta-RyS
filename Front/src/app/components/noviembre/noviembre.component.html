@@ -26,9 +26,9 @@
                           <tr *ngFor="let noviembre of listNoviembre">
                             <th>{{noviembre.nombre_cliente}}</th>
                             <th>{{noviembre.telefono_cliente}}</th>
-                            <th>{{noviembre.ultima_fecha_compra}}</th>
+                            <th>{{noviembre.ultima_fecha_compra | date: "yyyy-MM-dd"}}</th>
                             <th>{{noviembre.producto}}</th>
-                            <th>{{noviembre.ultima_fecha_llamada}}</th>
+                            <th>{{noviembre.ultima_fecha_llamada | date: "yyyy-MM-dd"}}</th>
                             <th>{{noviembre.nombre_encargado}}</th>
                             <th>{{noviembre.resultado}}</th>
                             <th>{{noviembre.comentarios}}</th>

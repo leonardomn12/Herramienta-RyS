@@ -26,9 +26,9 @@
                           <tr *ngFor="let octubre of listOctubre">
                             <th>{{octubre.nombre_cliente}}</th>
                             <th>{{octubre.telefono_cliente}}</th>
-                            <th>{{octubre.ultima_fecha_compra}}</th>
+                            <th>{{octubre.ultima_fecha_compra | date: "yyyy-MM-dd"}}</th>
                             <th>{{octubre.producto}}</th>
-                            <th>{{octubre.ultima_fecha_llamada}}</th>
+                            <th>{{octubre.ultima_fecha_llamada | date: "yyyy-MM-dd"}}</th>
                             <th>{{octubre.nombre_encargado}}</th>
                             <th>{{octubre.resultado}}</th>
                             <th>{{octubre.comentarios}}</th>
