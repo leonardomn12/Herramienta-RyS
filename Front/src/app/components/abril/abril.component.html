@@ -12,9 +12,9 @@
                           <tr>
                             <th scope="col">Cliente</th>
                             <th scope="col">Telefono</th>
-                            <th scope="col">Ultima fecha de compra</th>
-                            <th scope="col">Producto</th>
                             <th scope="col">Ultima fecha de llamada</th>
+                            <th scope="col">Valor de compra</th>
+                            <th scope="col">Próxima llamada</th>
                             <th scope="col">Nombre del encargado RyS</th>
                             <th scope="col">Resultados</th>
                             <th scope="col">Comentarios</th>
@@ -26,9 +26,10 @@
                           <tr *ngFor="let abril of listAbril">
                             <th>{{abril.nombre_cliente}}</th>
                             <th>{{abril.telefono_cliente}}</th>
-                            <th>{{abril.ultima_fecha_compra | date: "yyyy-MM-dd"}}</th>
-                            <th>{{abril.producto}}</th>
                             <th>{{abril.ultima_fecha_llamada | date: "yyyy-MM-dd"}}</th>
+                            <th>{{abril.valor_compra}}</th>
+                            <!-- <th>{{abril.frecuencia_compra}}</th> -->
+                            <th>{{abril.fecha_futura | date: "yyyy-MM-dd"}}</th>
                             <th>{{abril.nombre_encargado}}</th>
                             <th>{{abril.resultado}}</th>
                             <th>{{abril.comentarios}}</th>
