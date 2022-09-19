@@ -26,10 +26,10 @@
                           <tr *ngFor="let abril of listAbril">
                             <th>{{abril.nombre_cliente}}</th>
                             <th>{{abril.telefono_cliente}}</th>
-                            <th>{{abril.ultima_fecha_llamada | date: "yyyy-MM-dd"}}</th>
-                            <th>{{abril.valor_compra}}</th>
+                            <th>{{abril.ultima_fecha_llamada | date: "dd/MM/yyyy"}}</th>
+                            <th>{{abril.valor_compra | currency}}</th>
                             <!-- <th>{{abril.frecuencia_compra}}</th> -->
-                            <th>{{abril.fecha_futura | date: "yyyy-MM-dd"}}</th>
+                            <th>{{abril.fecha_futura}}</th>
                             <th>{{abril.nombre_encargado}}</th>
                             <th>{{abril.resultado}}</th>
                             <th>{{abril.comentarios}}</th>

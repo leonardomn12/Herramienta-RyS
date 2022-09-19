@@ -24,7 +24,7 @@
                         <div class="mb-3">
                             <input type="text" formControlName="ultima_fecha_llamada"
                                 class="form-control form-control-lg"
-                                placeholder="Ultima llamada realizada (AAAA-MM-DD)">
+                                placeholder="Ultima llamada realizada (AAAA/MM/DD)">
                             <div class="text-danger"
                                 *ngIf="abrilForm.get('ultima_fecha_llamada').hasError('required') && abrilForm.get('ultima_fecha_llamada').touched">
                                 <span>La fecha de llamada <strong>es obligatoria</strong></span>

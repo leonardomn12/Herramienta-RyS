@@ -14,7 +14,7 @@ export class CrearAbrilComponent implements OnInit {
   abrilForm: FormGroup;
   titulo = 'Crear registro';
   id: string;
-  fecha_actual = new Date().toLocaleDateString();
+  fecha_actual = new Date();
 
   constructor(
     private fb: FormBuilder,
@@ -46,11 +46,11 @@ export class CrearAbrilComponent implements OnInit {
     const abril: Abril = {
       nombre_cliente: this.abrilForm.get('nombre_cliente').value,
       telefono_cliente: this.abrilForm.get('telefono_cliente').value,
-      ultima_fecha_llamada: this.abrilForm.get('ultima_fecha_llamada').value,
-      valor_compra: this.abrilForm.get('producto').value,
+      ultima_fecha_llamada: new Date(this.abrilForm.get('ultima_fecha_llamada').value),
+      valor_compra: this.abrilForm.get('valor_compra').value,
       frecuencia_compra: this.abrilForm.get('frecuencia_compra').value,
       fecha_futura: calcularFechaFutura(
-        this.abrilForm.get('ultima_fecha_llamada').value,
+        new Date(this.abrilForm.get('ultima_fecha_llamada').value),
         this.abrilForm.get('frecuencia_compra').value
       ),
       nombre_encargado: this.abrilForm.get('nombre_encargado').value,
@@ -119,4 +119,8 @@ function calcularFechaFutura(fecha_llamada: Date, frecuencia: number) {
   let proxima_compra = fecha_llamada.getTime() + calculoFecha;
   let fecha_futura = new Date(proxima_compra);
   return fecha_futura.toLocaleDateString();
+}
+
+function formatDate(){
+
 }
