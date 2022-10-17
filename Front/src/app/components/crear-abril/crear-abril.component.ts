@@ -3,7 +3,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Abril } from 'src/app/models/abril';
+import { Calls } from 'src/app/models/calls';
 import { AppServiceService } from 'src/app/services/app-service.service';
+
+enum CallStatus {
+  PENDIENTE = 'PENDIENTE',
+  LLAMAR = 'LLAMAR AL CLIENTE',
+  ATENDIDO = 'ATENDIDO',
+}
 
 @Component({
   selector: 'app-crear-abril',
@@ -21,7 +28,8 @@ export class CrearAbrilComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private abrilService: AppServiceService,
-    private aRouter: ActivatedRoute
+    private aRouter: ActivatedRoute,
+    private calls: Calls
   ) {
     this.abrilForm = this.fb.group({
       nombre_cliente: ['', Validators.required],
@@ -44,18 +52,28 @@ export class CrearAbrilComponent implements OnInit {
     console.log(this.abrilForm);
 
     const abril: Abril = {
+      fecha_actual: this.fecha_actual,
       nombre_cliente: this.abrilForm.get('nombre_cliente').value,
       telefono_cliente: this.abrilForm.get('telefono_cliente').value,
-      ultima_fecha_llamada: new Date(this.abrilForm.get('ultima_fecha_llamada').value),
+      ultima_fecha_llamada: new Date(
+        this.abrilForm.get('ultima_fecha_llamada').value
+      ),
       valor_compra: this.abrilForm.get('valor_compra').value,
       frecuencia_compra: this.abrilForm.get('frecuencia_compra').value,
-      fecha_futura: calcularFechaFutura(
-        new Date(this.abrilForm.get('ultima_fecha_llamada').value),
+      fecha_futura: this.calls.calcularFechaFutura(
+        this.fecha_actual,
         this.abrilForm.get('frecuencia_compra').value
-      ),
+      ).toLocaleDateString(),
       nombre_encargado: this.abrilForm.get('nombre_encargado').value,
       resultado: this.abrilForm.get('resultado').value,
       comentarios: this.abrilForm.get('comentarios').value,
+      status: this.calls.getCallStatus(
+        this.fecha_actual,
+        this.calls.calcularFechaFutura(
+          this.fecha_actual,
+          this.abrilForm.get('frecuencia_compra').value
+        )
+      ),
     };
 
     if (this.id != null) {
@@ -110,17 +128,4 @@ export class CrearAbrilComponent implements OnInit {
       });
     }
   }
-}
-
-function calcularFechaFutura(fecha_llamada: Date, frecuencia: number) {
-  let frecuencia_compras = 12 / frecuencia;
-  let compra_anual = Math.round(frecuencia_compras) * 30;
-  const calculoFecha = 1000 * 60 * 60 * 24 * compra_anual;
-  let proxima_compra = fecha_llamada.getTime() + calculoFecha;
-  let fecha_futura = new Date(proxima_compra);
-  return fecha_futura.toLocaleDateString();
-}
-
-function formatDate(){
-
 }

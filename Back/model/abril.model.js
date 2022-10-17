@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const abril = mongoose.Schema({
+    fecha_actual: {
+        type: String,
+        required: true,
+        trim: true
+    },
     nombre_cliente: {
         type: String,
         required: true,
@@ -42,6 +47,10 @@ const abril = mongoose.Schema({
         trim: true
     },
     comentarios: {
+        type: String,
+        trim: true
+    },
+    status: {
         type: String,
         trim: true
     }

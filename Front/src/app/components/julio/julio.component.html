@@ -1,45 +1,52 @@
 <app-navbar></app-navbar>
 
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-lg-12 mx-auto">
-            <div class="card">
-                <div class="card-body text-center">
-                    <span class="titulo">VENTAS DE JULIO</span>
-                    <button class="btn btn-danger float-end" routerLink="/crear-julio">NUEVO</button>
-                    <table *ngIf="listJulio.length > 0" class="table table-striped mt-3">
-                        <thead>
-                          <tr>
-                            <th scope="col">Cliente</th>
-                            <th scope="col">Telefono</th>
-                            <th scope="col">Ultima fecha de compra</th>
-                            <th scope="col">Producto</th>
-                            <th scope="col">Ultima fecha de llamada</th>
-                            <th scope="col">Nombre del encargado RyS</th>
-                            <th scope="col">Resultados</th>
-                            <th scope="col">Comentarios</th>
-                            <th scope="col"></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        
-                          <tr *ngFor="let julio of listJulio">
-                            <th>{{julio.nombre_cliente}}</th>
-                            <th>{{julio.telefono_cliente}}</th>
-                            <th>{{julio.ultima_fecha_compra | date: "yyyy-MM-dd"}}</th>
-                            <th>{{julio.producto}}</th>
-                            <th>{{julio.ultima_fecha_llamada | date: "yyyy-MM-dd"}}</th>
-                            <th>{{julio.nombre_encargado}}</th>
-                            <th>{{julio.resultado}}</th>
-                            <th>{{julio.comentarios}}</th>
-                            <td><i  [routerLink]="['/editar-julio', julio._id]" class="fas fa-edit text-primary"></i>
-                              <i (click)="eliminarVenta(julio._id)" class="fas fa-trash text-danger"></i></td>
-                          </tr>
-                        <h5 style="text-align: start; margin-top: 10px;" *ngIf="listJulio.length == 0">No hay productos para mostrar</h5>
-                        </tbody>
-                      </table>
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-lg-12 mx-auto">
+      <div class="card">
+        <div class="card-body text-center">
+          <span class="titulo">VENTAS DE julio</span>
+          <button class="btn btn-danger float-end" routerLink="/crear-julio">NUEVO</button>
+          <table *ngIf="listJulio.length > 0" class="table table-striped mt-3">
+            <thead>
+              <tr>
+                <th scope="col">Fecha</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Ultima fecha de llamada</th>
+                <th scope="col">Valor de compra</th>
+                <th scope="col">Próxima llamada</th>
+                <th scope="col">Nombre del encargado RyS</th>
+                <th scope="col">Resultados</th>
+                <th scope="col">Comentarios</th>
+                <th scope="col">Estado</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let julio of listJulio">
+                <th>{{julio.fecha_actual | date: "dd/MM/yyyy"}}</th>
+                <th>{{julio.nombre_cliente}}</th>
+                <th>{{julio.telefono_cliente}}</th>
+                <th>{{julio.ultima_fecha_llamada | date: "dd/MM/yyyy"}}</th>
+                <th>{{julio.valor_compra | currency}}</th>
+                <!-- <th>{{julio.frecuencia_compra}}</th> -->
+                <th>{{julio.fecha_futura}}</th>
+                <th>{{julio.nombre_encargado}}</th>
+                <th>{{julio.resultado}}</th>
+                <th>{{julio.comentarios}}</th>
+                <th>{{julio.status}}</th>
+                <td><i [routerLink]="['/editar-julio', julio._id]" class="fas fa-edit text-primary"></i>
+                  <i (click)="eliminarVenta(julio._id)" class="fas fa-trash text-danger"></i>
+                </td>
+              </tr>
+              <h5 style="text-align: start; margin-top: 10px;" *ngIf="listJulio.length == 0">No hay productos para
+                mostrar</h5>
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
+  </div>
 </div>

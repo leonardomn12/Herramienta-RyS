@@ -1,6 +1,6 @@
 const Marzo = require('../model/marzo.model');
 
-exports.createMarzo = async (req, res)=>{
+exports.createMarzo = async (req, res) => {
     try {
         let marzo;
 
@@ -16,7 +16,7 @@ exports.createMarzo = async (req, res)=>{
 
 exports.getVentasMarzo = async (req, res) => {
     try {
-        
+
         const marzo = await Marzo.find()
         res.json(marzo)
 
@@ -28,25 +28,45 @@ exports.getVentasMarzo = async (req, res) => {
 
 exports.updateMarzo = async (req, res) => {
     try {
-        
-        const {nombre_cliente, telefono_cliente, ultima_fecha_compra,
-               producto, ultima_fecha_llamada, nombre_encargado, resultado, comentarios} = req.body
-        let marzo = await Marzo.findById(req.params.id)
 
-        if(!marzo){
-            res.status(404).json({msg: 'No existe el producto'})
+        const {
+            fecha_actual,
+            nombre_cliente,
+            telefono_cliente,
+            ultima_fecha_llamada,
+            valor_compra,
+            frecuencia_compra,
+            fecha_futura,
+            nombre_encargado,
+            resultado,
+            comentarios,
+            status
+        } = req.body
+        let marzo = await marzo.findById(req.params.id)
+
+        if (!marzo) {
+            res.status(404).json({
+                msg: 'No existe el producto'
+            })
         }
 
+        marzo.fecha_actual = fecha_actual;
         marzo.nombre_cliente = nombre_cliente;
         marzo.telefono_cliente = telefono_cliente;
-        marzo.ultima_fecha_compra = ultima_fecha_compra;
-        marzo.producto = producto;
         marzo.ultima_fecha_llamada = ultima_fecha_llamada;
+        marzo.valor_compra = valor_compra;
+        marzo.frecuencia_compra = frecuencia_compra;
+        marzo.fecha_futura = fecha_futura;
         marzo.nombre_encargado = nombre_encargado;
         marzo.resultado = resultado;
         marzo.comentarios = comentarios;
-        
-        marzo = await Marzo.findOneAndUpdate({_id: req.params.id}, marzo, {new: true});
+        marzo.status = status;
+
+        marzo = await Marzo.findOneAndUpdate({
+            _id: req.params.id
+        }, marzo, {
+            new: true
+        });
         res.json(marzo)
 
     } catch (error) {
@@ -57,13 +77,26 @@ exports.updateMarzo = async (req, res) => {
 
 exports.getMarzo = async (req, res) => {
     try {
-        
-        const {nombre_cliente, telefono_cliente, ultima_fecha_compra,
-               producto, ultima_fecha_llamada, nombre_encargado, resultado, comentarios} = req.body
+
+        const {
+            fecha_actual,
+            nombre_cliente,
+            telefono_cliente,
+            ultima_fecha_llamada,
+            valor_compra,
+            frecuencia_compra,
+            fecha_futura,
+            nombre_encargado,
+            resultado,
+            comentarios,
+            status
+        } = req.body
         let marzo = await Marzo.findById(req.params.id)
 
-        if(!marzo){
-            res.status(404).json({msg: 'No existe el producto'})
+        if (!marzo) {
+            res.status(404).json({
+                msg: 'No existe el producto'
+            })
         }
 
         res.json(marzo)
@@ -76,16 +109,33 @@ exports.getMarzo = async (req, res) => {
 
 exports.deleteMarzo = async (req, res) => {
     try {
-    const {nombre_cliente, telefono_cliente, ultima_fecha_compra,
-            producto, ultima_fecha_llamada, nombre_encargado, resultado, comentarios} = req.body
-     let marzo = await Marzo.findById(req.params.id)
+        const {
+            fecha_actual,
+            nombre_cliente,
+            telefono_cliente,
+            ultima_fecha_llamada,
+            valor_compra,
+            frecuencia_compra,
+            fecha_futura,
+            nombre_encargado,
+            resultado,
+            comentarios,
+            status
+        } = req.body
+        let marzo = await Marzo.findById(req.params.id)
 
-     if(!marzo){
-         res.status(404).json({msg: 'No existe el producto'})
-     }
+        if (!marzo) {
+            res.status(404).json({
+                msg: 'No existe el producto'
+            })
+        }
 
-     await Marzo.findOneAndRemove({_id: req.params.id})
-     res.json({msg: 'Registro eliminado con éxito'})
+        await Marzo.findOneAndRemove({
+            _id: req.params.id
+        })
+        res.json({
+            msg: 'Registro eliminado con éxito'
+        })
     } catch (error) {
         console.log(error)
         res.status(500).send('Hubo un error')

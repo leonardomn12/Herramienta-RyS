@@ -1,6 +1,6 @@
 const Octubre = require('../model/octubre.model');
 
-exports.createOctubre = async (req, res)=>{
+exports.createOctubre = async (req, res) => {
     try {
         let octubre;
 
@@ -16,7 +16,7 @@ exports.createOctubre = async (req, res)=>{
 
 exports.getVentasOctubre = async (req, res) => {
     try {
-        
+
         const octubre = await Octubre.find()
         res.json(octubre)
 
@@ -28,25 +28,45 @@ exports.getVentasOctubre = async (req, res) => {
 
 exports.updateOctubre = async (req, res) => {
     try {
-        
-        const {nombre_cliente, telefono_cliente, ultima_fecha_compra,
-               producto, ultima_fecha_llamada, nombre_encargado, resultado, comentarios} = req.body
+
+        const {
+            fecha_actual,
+            nombre_cliente,
+            telefono_cliente,
+            ultima_fecha_llamada,
+            valor_compra,
+            frecuencia_compra,
+            fecha_futura,
+            nombre_encargado,
+            resultado,
+            comentarios,
+            status
+        } = req.body
         let octubre = await Octubre.findById(req.params.id)
 
-        if(!octubre){
-            res.status(404).json({msg: 'No existe el producto'})
+        if (!octubre) {
+            res.status(404).json({
+                msg: 'No existe el producto'
+            })
         }
 
+        octubre.fecha_actual = fecha_actual;
         octubre.nombre_cliente = nombre_cliente;
         octubre.telefono_cliente = telefono_cliente;
-        octubre.ultima_fecha_compra = ultima_fecha_compra;
-        octubre.producto = producto;
         octubre.ultima_fecha_llamada = ultima_fecha_llamada;
+        octubre.valor_compra = valor_compra;
+        octubre.frecuencia_compra = frecuencia_compra;
+        octubre.fecha_futura = fecha_futura;
         octubre.nombre_encargado = nombre_encargado;
         octubre.resultado = resultado;
         octubre.comentarios = comentarios;
-        
-        octubre = await Octubre.findOneAndUpdate({_id: req.params.id}, octubre, {new: true});
+        octubre.status = status;
+
+        octubre = await Octubre.findOneAndUpdate({
+            _id: req.params.id
+        }, octubre, {
+            new: true
+        });
         res.json(octubre)
 
     } catch (error) {
@@ -57,13 +77,26 @@ exports.updateOctubre = async (req, res) => {
 
 exports.getOctubre = async (req, res) => {
     try {
-        
-        const {nombre_cliente, telefono_cliente, ultima_fecha_compra,
-               producto, ultima_fecha_llamada, nombre_encargado, resultado, comentarios} = req.body
+
+        const {
+            fecha_actual,
+            nombre_cliente,
+            telefono_cliente,
+            ultima_fecha_llamada,
+            valor_compra,
+            frecuencia_compra,
+            fecha_futura,
+            nombre_encargado,
+            resultado,
+            comentarios,
+            status
+        } = req.body
         let octubre = await Octubre.findById(req.params.id)
 
-        if(!octubre){
-            res.status(404).json({msg: 'No existe el producto'})
+        if (!octubre) {
+            res.status(404).json({
+                msg: 'No existe el producto'
+            })
         }
 
         res.json(octubre)
@@ -76,16 +109,33 @@ exports.getOctubre = async (req, res) => {
 
 exports.deleteOctubre = async (req, res) => {
     try {
-    const {nombre_cliente, telefono_cliente, ultima_fecha_compra,
-            producto, ultima_fecha_llamada, nombre_encargado, resultado, comentarios} = req.body
-     let octubre = await Octubre.findById(req.params.id)
+        const {
+            fecha_actual,
+            nombre_cliente,
+            telefono_cliente,
+            ultima_fecha_llamada,
+            valor_compra,
+            frecuencia_compra,
+            fecha_futura,
+            nombre_encargado,
+            resultado,
+            comentarios,
+            status
+        } = req.body
+        let octubre = await Octubre.findById(req.params.id)
 
-     if(!octubre){
-         res.status(404).json({msg: 'No existe el producto'})
-     }
+        if (!octubre) {
+            res.status(404).json({
+                msg: 'No existe el producto'
+            })
+        }
 
-     await Octubre.findOneAndRemove({_id: req.params.id})
-     res.json({msg: 'Registro eliminado con éxito'})
+        await Octubre.findOneAndRemove({
+            _id: req.params.id
+        })
+        res.json({
+            msg: 'Registro eliminado con éxito'
+        })
     } catch (error) {
         console.log(error)
         res.status(500).send('Hubo un error')
