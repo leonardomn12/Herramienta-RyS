@@ -6,12 +6,6 @@ import { Abril } from 'src/app/models/abril';
 import { Calls } from 'src/app/models/calls';
 import { AppServiceService } from 'src/app/services/app-service.service';
 
-enum CallStatus {
-  PENDIENTE = 'PENDIENTE',
-  LLAMAR = 'LLAMAR AL CLIENTE',
-  ATENDIDO = 'ATENDIDO',
-}
-
 @Component({
   selector: 'app-crear-abril',
   templateUrl: './crear-abril.component.html',
@@ -22,14 +16,14 @@ export class CrearAbrilComponent implements OnInit {
   titulo = 'Crear registro';
   id: string;
   fecha_actual = new Date();
+  calls = new Calls();
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private toastr: ToastrService,
     private abrilService: AppServiceService,
-    private aRouter: ActivatedRoute,
-    private calls: Calls
+    private aRouter: ActivatedRoute
   ) {
     this.abrilForm = this.fb.group({
       nombre_cliente: ['', Validators.required],
@@ -60,10 +54,12 @@ export class CrearAbrilComponent implements OnInit {
       ),
       valor_compra: this.abrilForm.get('valor_compra').value,
       frecuencia_compra: this.abrilForm.get('frecuencia_compra').value,
-      fecha_futura: this.calls.calcularFechaFutura(
-        this.fecha_actual,
-        this.abrilForm.get('frecuencia_compra').value
-      ).toLocaleDateString(),
+      fecha_futura: this.calls
+        .calcularFechaFutura(
+          this.fecha_actual,
+          this.abrilForm.get('frecuencia_compra').value
+        )
+        .toLocaleDateString(),
       nombre_encargado: this.abrilForm.get('nombre_encargado').value,
       resultado: this.abrilForm.get('resultado').value,
       comentarios: this.abrilForm.get('comentarios').value,

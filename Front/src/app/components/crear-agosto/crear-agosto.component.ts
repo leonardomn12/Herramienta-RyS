@@ -16,14 +16,14 @@ export class CrearAgostoComponent implements OnInit {
   titulo = 'Crear registro';
   id: string;
   fecha_actual = new Date();
+  calls = new Calls();
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private toastr: ToastrService,
     private agostoService: AppServiceService,
-    private aRouter: ActivatedRoute,
-    private calls: Calls
+    private aRouter: ActivatedRoute
   ) {
     this.agostoForm = this.fb.group({
       nombre_cliente: ['', Validators.required],

@@ -16,14 +16,14 @@ export class CrearDiciembreComponent implements OnInit {
   titulo = 'Crear registro';
   id: string;
   fecha_actual = new Date();
+  calls = new Calls();
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private toastr: ToastrService,
     private diciembreService: AppServiceService,
-    private aRouter: ActivatedRoute,
-    private calls: Calls
+    private aRouter: ActivatedRoute
   ) {
     this.diciembreForm = this.fb.group({
       nombre_cliente: ['', Validators.required],

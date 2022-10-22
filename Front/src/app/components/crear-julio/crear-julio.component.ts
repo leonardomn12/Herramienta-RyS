@@ -16,6 +16,7 @@ export class CrearJulioComponent implements OnInit {
   titulo = 'Crear registro';
   id: string;
   fecha_actual = new Date();
+  calls = new Calls();
 
   constructor(
     private fb: FormBuilder,
@@ -23,7 +24,6 @@ export class CrearJulioComponent implements OnInit {
     private toastr: ToastrService,
     private julioService: AppServiceService,
     private aRouter: ActivatedRoute,
-    private calls: Calls
   ) {
     this.julioForm = this.fb.group({
       nombre_cliente: ['', Validators.required],

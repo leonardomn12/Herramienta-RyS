@@ -75,7 +75,7 @@ exports.updateJulio = async (req, res) => {
     }
 }
 
-exports.getjulio = async (req, res) => {
+exports.getJulio = async (req, res) => {
     try {
 
         const {
@@ -107,7 +107,7 @@ exports.getjulio = async (req, res) => {
     }
 }
 
-exports.deletejulio = async (req, res) => {
+exports.deleteJulio = async (req, res) => {
     try {
         const {
             fecha_actual,

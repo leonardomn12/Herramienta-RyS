@@ -26,7 +26,7 @@ exports.getVentasDiciembre = async (req, res) => {
     }
 }
 
-exports.updatediciembre = async (req, res) => {
+exports.updateDiciembre = async (req, res) => {
     try {
 
         const {
