@@ -1,4 +1,4 @@
-const diciembre = require('../model/diciembre.model');
+const Diciembre = require('../model/diciembre.model');
 
 exports.createDiciembre = async (req, res) => {
     try {
