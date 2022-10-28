@@ -6,6 +6,19 @@
                     <span class="titulo">{{titulo | uppercase}}</span>
                     <form class="mt-3" [formGroup]="mayoForm" (ngSubmit)="agregarRegistro()">
                         <div class="mb-3">
+                            <mat-form-field appearance="fill" class="form-control form-control-lg">
+                                <mat-label>Fecha actual</mat-label>
+                                <input matInput [matDatepicker]="fecha" formControlName="fecha_actual">
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matSuffix [for]="fecha"></mat-datepicker-toggle>
+                                <mat-datepicker #fecha></mat-datepicker>
+                            </mat-form-field>
+                            <div class="text-danger"
+                                *ngIf="mayoForm.get('fecha_actual').hasError('required') && mayoForm.get('fecha_actual').touched">
+                                <span>La fecha actual <strong>es obligatoria</strong></span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
                             <input type="text" formControlName="nombre_cliente" class="form-control form-control-lg"
                                 placeholder="Cliente">
                             <div class="text-danger"
@@ -22,9 +35,13 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <input type="text" formControlName="ultima_fecha_llamada"
-                                class="form-control form-control-lg"
-                                placeholder="Ultima llamada realizada (AAAA/MM/DD)">
+                            <mat-form-field appearance="fill" class="form-control form-control-lg">
+                                <mat-label>Fecha de la última llamada</mat-label>
+                                <input matInput [matDatepicker]="ultima_fecha" formControlName="ultima_fecha_llamada">
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matSuffix [for]="ultima_fecha"></mat-datepicker-toggle>
+                                <mat-datepicker #ultima_fecha></mat-datepicker>
+                            </mat-form-field>
                             <div class="text-danger"
                                 *ngIf="mayoForm.get('ultima_fecha_llamada').hasError('required') && mayoForm.get('ultima_fecha_llamada').touched">
                                 <span>La fecha de llamada <strong>es obligatoria</strong></span>

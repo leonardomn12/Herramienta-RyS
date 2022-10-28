@@ -4,9 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {
+  MatNativeDateModule,
+  MAT_DATE_LOCALE,
+  NativeDateAdapter,
+} from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { HttpClientModule } from '@angular/common/http';
 import { EneroComponent } from './components/enero/enero.component';
 import { ToastrModule } from 'ngx-toastr';
 import { CrearEneroComponent } from './components/crear-enero/crear-enero.component';
@@ -69,7 +78,7 @@ import { CrearDiciembreComponent } from './components/crear-diciembre/crear-dici
     CrearSeptiembreComponent,
     CrearOctubreComponent,
     CrearNoviembreComponent,
-    CrearDiciembreComponent
+    CrearDiciembreComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,9 +87,16 @@ import { CrearDiciembreComponent } from './components/crear-diciembre/crear-dici
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatFormFieldModule,
+    ToastrModule.forRoot(),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    NativeDateAdapter,
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

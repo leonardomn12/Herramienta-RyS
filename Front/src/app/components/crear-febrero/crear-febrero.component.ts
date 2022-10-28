@@ -15,7 +15,6 @@ export class CrearFebreroComponent implements OnInit {
   febreroForm: FormGroup;
   titulo = 'Crear registro';
   id: string;
-  fecha_actual = new Date();
   calls = new Calls();
 
   constructor(
@@ -26,6 +25,7 @@ export class CrearFebreroComponent implements OnInit {
     private aRouter: ActivatedRoute
   ) {
     this.febreroForm = this.fb.group({
+      fecha_actual: ['', Validators.required],
       nombre_cliente: ['', Validators.required],
       telefono_cliente: ['', Validators.required],
       ultima_fecha_llamada: ['', Validators.required],
@@ -46,7 +46,7 @@ export class CrearFebreroComponent implements OnInit {
     console.log(this.febreroForm);
 
     const febrero: Febrero = {
-      fecha_actual: this.fecha_actual,
+      fecha_actual: this.febreroForm.get('fecha_actual').value,
       nombre_cliente: this.febreroForm.get('nombre_cliente').value,
       telefono_cliente: this.febreroForm.get('telefono_cliente').value,
       ultima_fecha_llamada: new Date(
@@ -56,7 +56,7 @@ export class CrearFebreroComponent implements OnInit {
       frecuencia_compra: this.febreroForm.get('frecuencia_compra').value,
       fecha_futura: this.calls
         .calcularFechaFutura(
-          this.fecha_actual,
+          this.febreroForm.get('fecha_actual').value,
           this.febreroForm.get('frecuencia_compra').value
         )
         .toLocaleDateString(),
@@ -64,9 +64,8 @@ export class CrearFebreroComponent implements OnInit {
       resultado: this.febreroForm.get('resultado').value,
       comentarios: this.febreroForm.get('comentarios').value,
       status: this.calls.getCallStatus(
-        this.fecha_actual,
         this.calls.calcularFechaFutura(
-          this.fecha_actual,
+          this.febreroForm.get('fecha_actual').value,
           this.febreroForm.get('frecuencia_compra').value
         )
       ),

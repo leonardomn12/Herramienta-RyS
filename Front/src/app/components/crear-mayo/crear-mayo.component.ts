@@ -15,7 +15,6 @@ export class CrearMayoComponent implements OnInit {
   mayoForm: FormGroup;
   titulo = 'Crear registro';
   id: string;
-  fecha_actual = new Date();
   calls = new Calls();
 
   constructor(
@@ -26,6 +25,7 @@ export class CrearMayoComponent implements OnInit {
     private aRouter: ActivatedRoute
   ) {
     this.mayoForm = this.fb.group({
+      fecha_actual: ['', Validators.required],
       nombre_cliente: ['', Validators.required],
       telefono_cliente: ['', Validators.required],
       ultima_fecha_llamada: ['', Validators.required],
@@ -46,7 +46,7 @@ export class CrearMayoComponent implements OnInit {
     console.log(this.mayoForm);
 
     const mayo: Mayo = {
-      fecha_actual: this.fecha_actual,
+      fecha_actual: this.mayoForm.get('fecha_actual').value,
       nombre_cliente: this.mayoForm.get('nombre_cliente').value,
       telefono_cliente: this.mayoForm.get('telefono_cliente').value,
       ultima_fecha_llamada: new Date(
@@ -56,7 +56,7 @@ export class CrearMayoComponent implements OnInit {
       frecuencia_compra: this.mayoForm.get('frecuencia_compra').value,
       fecha_futura: this.calls
         .calcularFechaFutura(
-          this.fecha_actual,
+          this.mayoForm.get('fecha_actual').value,
           this.mayoForm.get('frecuencia_compra').value
         )
         .toLocaleDateString(),
@@ -64,9 +64,8 @@ export class CrearMayoComponent implements OnInit {
       resultado: this.mayoForm.get('resultado').value,
       comentarios: this.mayoForm.get('comentarios').value,
       status: this.calls.getCallStatus(
-        this.fecha_actual,
         this.calls.calcularFechaFutura(
-          this.fecha_actual,
+          this.mayoForm.get('fecha_actual').value,
           this.mayoForm.get('frecuencia_compra').value
         )
       ),
@@ -112,6 +111,7 @@ export class CrearMayoComponent implements OnInit {
       this.titulo = 'Editar Registro';
       this.mayoService.getRegistroMayo(this.id).subscribe((data) => {
         this.mayoForm.setValue({
+          fecha_actual: data.fecha_actual,
           nombre_cliente: data.nombre_cliente,
           telefono_cliente: data.telefono_cliente,
           ultima_fecha_llamada: data.ultima_fecha_llamada,

@@ -15,7 +15,6 @@ export class CrearJulioComponent implements OnInit {
   julioForm: FormGroup;
   titulo = 'Crear registro';
   id: string;
-  fecha_actual = new Date();
   calls = new Calls();
 
   constructor(
@@ -26,6 +25,7 @@ export class CrearJulioComponent implements OnInit {
     private aRouter: ActivatedRoute,
   ) {
     this.julioForm = this.fb.group({
+      fecha_actual: ['', Validators.required],
       nombre_cliente: ['', Validators.required],
       telefono_cliente: ['', Validators.required],
       ultima_fecha_llamada: ['', Validators.required],
@@ -46,7 +46,7 @@ export class CrearJulioComponent implements OnInit {
     console.log(this.julioForm);
 
     const julio: Julio = {
-      fecha_actual: this.fecha_actual,
+      fecha_actual: this.julioForm.get('fecha_actual').value,
       nombre_cliente: this.julioForm.get('nombre_cliente').value,
       telefono_cliente: this.julioForm.get('telefono_cliente').value,
       ultima_fecha_llamada: new Date(
@@ -56,7 +56,7 @@ export class CrearJulioComponent implements OnInit {
       frecuencia_compra: this.julioForm.get('frecuencia_compra').value,
       fecha_futura: this.calls
         .calcularFechaFutura(
-          this.fecha_actual,
+          this.julioForm.get('fecha_actual').value,
           this.julioForm.get('frecuencia_compra').value
         )
         .toLocaleDateString(),
@@ -64,9 +64,8 @@ export class CrearJulioComponent implements OnInit {
       resultado: this.julioForm.get('resultado').value,
       comentarios: this.julioForm.get('comentarios').value,
       status: this.calls.getCallStatus(
-        this.fecha_actual,
         this.calls.calcularFechaFutura(
-          this.fecha_actual,
+          this.julioForm.get('fecha_actual').value,
           this.julioForm.get('frecuencia_compra').value
         )
       ),
@@ -112,6 +111,7 @@ export class CrearJulioComponent implements OnInit {
       this.titulo = 'Editar Registro';
       this.julioService.getRegistroJulio(this.id).subscribe((data) => {
         this.julioForm.setValue({
+          fecha_actual: data.fecha_actual,
           nombre_cliente: data.nombre_cliente,
           telefono_cliente: data.telefono_cliente,
           ultima_fecha_llamada: data.ultima_fecha_llamada,

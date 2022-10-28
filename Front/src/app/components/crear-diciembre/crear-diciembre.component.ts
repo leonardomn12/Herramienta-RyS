@@ -15,7 +15,6 @@ export class CrearDiciembreComponent implements OnInit {
   diciembreForm: FormGroup;
   titulo = 'Crear registro';
   id: string;
-  fecha_actual = new Date();
   calls = new Calls();
 
   constructor(
@@ -26,6 +25,7 @@ export class CrearDiciembreComponent implements OnInit {
     private aRouter: ActivatedRoute
   ) {
     this.diciembreForm = this.fb.group({
+      fecha_actual: ['', Validators.required],
       nombre_cliente: ['', Validators.required],
       telefono_cliente: ['', Validators.required],
       ultima_fecha_llamada: ['', Validators.required],
@@ -46,7 +46,7 @@ export class CrearDiciembreComponent implements OnInit {
     console.log(this.diciembreForm);
 
     const diciembre: Diciembre = {
-      fecha_actual: this.fecha_actual,
+      fecha_actual: this.diciembreForm.get('fecha_actual').value,
       nombre_cliente: this.diciembreForm.get('nombre_cliente').value,
       telefono_cliente: this.diciembreForm.get('telefono_cliente').value,
       ultima_fecha_llamada: new Date(
@@ -56,7 +56,7 @@ export class CrearDiciembreComponent implements OnInit {
       frecuencia_compra: this.diciembreForm.get('frecuencia_compra').value,
       fecha_futura: this.calls
         .calcularFechaFutura(
-          this.fecha_actual,
+          this.diciembreForm.get('fecha_actual').value,
           this.diciembreForm.get('frecuencia_compra').value
         )
         .toLocaleDateString(),
@@ -64,9 +64,8 @@ export class CrearDiciembreComponent implements OnInit {
       resultado: this.diciembreForm.get('resultado').value,
       comentarios: this.diciembreForm.get('comentarios').value,
       status: this.calls.getCallStatus(
-        this.fecha_actual,
         this.calls.calcularFechaFutura(
-          this.fecha_actual,
+          this.diciembreForm.get('fecha_actual').value,
           this.diciembreForm.get('frecuencia_compra').value
         )
       ),
@@ -112,6 +111,7 @@ export class CrearDiciembreComponent implements OnInit {
       this.titulo = 'Editar Registro';
       this.diciembreService.getRegistroDiciembre(this.id).subscribe((data) => {
         this.diciembreForm.setValue({
+          fecha_actual: data.fecha_actual,
           nombre_cliente: data.nombre_cliente,
           telefono_cliente: data.telefono_cliente,
           ultima_fecha_llamada: data.ultima_fecha_llamada,
