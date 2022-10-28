@@ -12,21 +12,27 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <input type="text" formControlName="nombre_encargado" class="form-control form-control-lg" placeholder="Nombre del encargado de compras">
-                            <div class="text-danger" *ngIf="clientesForm.get('nombre_encargado').hasError('required') && clientesForm.get('nombre_encargado').touched">
-                                <span>El nombre del encargado <strong>es obligatorio</strong></span>
+                            <input type="text" formControlName="identificacion" class="form-control form-control-lg" placeholder="Identificacion">
+                            <div class="text-danger" *ngIf="clientesForm.get('identificacion').hasError('required') && clientesForm.get('identificacion').touched">
+                                <span>La identificacion <strong>es obligatoria</strong></span>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <input type="text" formControlName="correo" class="form-control form-control-lg" placeholder="Correo">
-                            <div class="text-danger" *ngIf="clientesForm.get('correo').hasError('required') && clientesForm.get('correo').touched">
-                                <span>El correo <strong>es obligatorio</strong></span>
+                            <input type="text" formControlName="direccion" class="form-control form-control-lg" placeholder="Direccion">
+                            <div class="text-danger" *ngIf="clientesForm.get('direccion').hasError('required') && clientesForm.get('direccion').touched">
+                                <span>La direccion <strong>es obligatoria</strong></span>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <input type="number" formControlName="celular" class="form-control form-control-lg" placeholder="Celular">
-                            <div class="text-danger" *ngIf="clientesForm.get('celular').hasError('required') && clientesForm.get('celular').touched">
-                                <span>El celular <strong>es obligatorio</strong></span>
+                            <input type="text" formControlName="telefono" class="form-control form-control-lg" placeholder="Telefono">
+                            <div class="text-danger" *ngIf="clientesForm.get('telefono').hasError('required') && clientesForm.get('telefono').touched">
+                                <span>El telefono <strong>es obligatorio</strong></span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" formControlName="ciudad" class="form-control form-control-lg" placeholder="Ciudad">
+                            <div class="text-danger" *ngIf="clientesForm.get('ciudad').hasError('required') && clientesForm.get('ciudad').touched">
+                                <span>La ciudad <strong>es obligatoria</strong></span>
                             </div>
                         </div>
                         

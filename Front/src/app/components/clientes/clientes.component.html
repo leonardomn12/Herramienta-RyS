@@ -10,10 +10,11 @@
                     <table *ngIf="listClientes.length > 0" class="table table-striped mt-3">
                         <thead>
                           <tr>
-                            <th scope="col">Cliente</th>
-                            <th scope="col">Encargado de las compras</th>
-                            <th scope="col">Correo electrónico</th>
-                            <th scope="col">Celular</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Identificacion</th>
+                            <th scope="col">Direccion</th>
+                            <th scope="col">Telefono</th>
+                            <th scope="col">Ciudad</th>
                             <th scope="col"></th>
                           </tr>
                         </thead>
@@ -21,12 +22,13 @@
                         
                           <tr *ngFor="let cliente of listClientes">
                             <th>{{cliente.nombre_cliente}}</th>
-                            <th>{{cliente.nombre_encargado}}</th>
-                            <th>{{cliente.correo}}</th>
-                            <th>{{cliente.celular}}</th>
-                            
+                            <th>{{cliente.identificacion}}</th>
+                            <th>{{cliente.direccion}}</th>
+                            <th>{{cliente.telefono}}</th>
+                            <th>{{cliente.ciudad}}</th>
+
                             <td><i  [routerLink]="['/editar-cliente', cliente._id]" class="fas fa-edit text-primary"></i>
-                              <i (click)="eliminarCliente(cliente._id)" class="fas fa-trash text-danger"></i></td>
+                              <i (click)="mostrarDialogo(cliente._id)" class="fas fa-trash text-danger"></i></td>
                           </tr>
                         <h5 style="text-align: start; margin-top: 10px;" *ngIf="listClientes.length == 0">No hay productos para mostrar</h5>
                         </tbody>

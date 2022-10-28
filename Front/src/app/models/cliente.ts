@@ -1,15 +1,22 @@
 export class Cliente {
-    _id?: number;
-    nombre_cliente: string;
-    nombre_encargado: string;
-    correo: string;
-    celular: number;
+  _id?: number;
+  nombre_cliente: string;
+  identificacion: string;
+  direccion: string;
+  telefono: string;
+  ciudad: string;
 
-    constructor(nombre_cliente: string, nombre_encargado: string, correo: string, celular: number){
-        this.nombre_cliente = nombre_cliente
-        this.nombre_encargado = nombre_encargado
-        this.correo = correo
-        this.celular = celular
-    }
+  constructor(
+    nombre_cliente: string,
+    identificacion: string,
+    direccion: string,
+    telefono: string,
+    ciudad: string
+  ) {
+    this.nombre_cliente = nombre_cliente;
+    this.identificacion = identificacion;
+    this.direccion = direccion;
+    this.telefono = telefono;
+    this.ciudad = ciudad;
+  }
 }
-

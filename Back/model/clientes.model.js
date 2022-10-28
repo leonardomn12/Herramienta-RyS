@@ -1,24 +1,28 @@
 const mongoose = require('mongoose')
 
 const clienteSchema = mongoose.Schema({
-    nombre_cliente:{
+    nombre_cliente: {
         type: String,
         required: true,
-        trim: true
-    }, 
-    nombre_encargado:{
-        type: String,
-        required: true,
-        trim: true
-    }, 
-    correo: {
-        type:String,
-        required: true,
-        unique: true,
         trim: true
     },
-    celular:{
-        type: Number,
+    identificacion: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    direccion: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    telefono: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    ciudad: {
+        type: String,
         required: true,
         trim: true
     }

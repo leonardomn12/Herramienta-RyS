@@ -29,7 +29,7 @@ exports.getClientes = async (req, res) => {
 exports.updateCliente = async (req, res) => {
     try {
         
-        const {nombre_cliente, nombre_encargado, correo, celular} = req.body
+        const {nombre_cliente, identificacion, direccion, telefono, ciudad} = req.body
         let cliente = await Cliente.findById(req.params.id)
 
         if(!cliente){
@@ -37,9 +37,10 @@ exports.updateCliente = async (req, res) => {
         }
 
         cliente.nombre_cliente = nombre_cliente;
-        cliente.nombre_encargado = nombre_encargado;
-        cliente.correo = correo;
-        cliente.celular = celular;
+        cliente.identificacion = identificacion;
+        cliente.direccion = direccion;
+        cliente.telefono = telefono;
+        cliente.ciudad = ciudad;
         
         cliente = await Cliente.findOneAndUpdate({_id: req.params.id}, cliente, {new: true});
         res.json(cliente)
@@ -53,7 +54,7 @@ exports.updateCliente = async (req, res) => {
 exports.getCliente = async (req, res) => {
     try {
         
-        const {nombre_cliente, nombre_encargado, correo, celular} = req.body
+        const {nombre_cliente, identificacion, direccion, telefono, ciudad} = req.body
         let cliente = await Cliente.findById(req.params.id)
 
         if(!cliente){
@@ -71,7 +72,7 @@ exports.getCliente = async (req, res) => {
 exports.deleteCliente = async (req, res) => {
     try {
 
-        const {nombre_cliente, nombre_encargado, correo, celular} = req.body
+        const {nombre_cliente, identificacion, direccion, telefono, ciudad} = req.body
         let cliente = await Cliente.findById(req.params.id)
 
      if(!cliente){
