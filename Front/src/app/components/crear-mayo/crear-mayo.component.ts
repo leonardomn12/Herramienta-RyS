@@ -58,8 +58,7 @@ export class CrearMayoComponent implements OnInit {
         .calcularFechaFutura(
           this.mayoForm.get('fecha_actual').value,
           this.mayoForm.get('frecuencia_compra').value
-        )
-        .toLocaleDateString(),
+        ),
       nombre_encargado: this.mayoForm.get('nombre_encargado').value,
       resultado: this.mayoForm.get('resultado').value,
       comentarios: this.mayoForm.get('comentarios').value,

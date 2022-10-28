@@ -58,8 +58,7 @@ export class CrearAgostoComponent implements OnInit {
         .calcularFechaFutura(
           this.agostoForm.get('fecha_actual').value,
           this.agostoForm.get('frecuencia_compra').value
-        )
-        .toLocaleDateString(),
+        ),
       nombre_encargado: this.agostoForm.get('nombre_encargado').value,
       resultado: this.agostoForm.get('resultado').value,
       comentarios: this.agostoForm.get('comentarios').value,

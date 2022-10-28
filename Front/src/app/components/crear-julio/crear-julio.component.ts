@@ -58,8 +58,7 @@ export class CrearJulioComponent implements OnInit {
         .calcularFechaFutura(
           this.julioForm.get('fecha_actual').value,
           this.julioForm.get('frecuencia_compra').value
-        )
-        .toLocaleDateString(),
+        ),
       nombre_encargado: this.julioForm.get('nombre_encargado').value,
       resultado: this.julioForm.get('resultado').value,
       comentarios: this.julioForm.get('comentarios').value,

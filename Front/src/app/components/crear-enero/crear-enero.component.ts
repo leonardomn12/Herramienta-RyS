@@ -57,8 +57,7 @@ export class CrearEneroComponent implements OnInit {
         .calcularFechaFutura(
           this.eneroForm.get('fecha_actual').value,
           this.eneroForm.get('frecuencia_compra').value
-        )
-        .toLocaleDateString(),
+        ),
       nombre_encargado: this.eneroForm.get('nombre_encargado').value,
       resultado: this.eneroForm.get('resultado').value,
       comentarios: this.eneroForm.get('comentarios').value,

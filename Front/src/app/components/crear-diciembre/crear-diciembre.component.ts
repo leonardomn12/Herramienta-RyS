@@ -58,8 +58,7 @@ export class CrearDiciembreComponent implements OnInit {
         .calcularFechaFutura(
           this.diciembreForm.get('fecha_actual').value,
           this.diciembreForm.get('frecuencia_compra').value
-        )
-        .toLocaleDateString(),
+        ),
       nombre_encargado: this.diciembreForm.get('nombre_encargado').value,
       resultado: this.diciembreForm.get('resultado').value,
       comentarios: this.diciembreForm.get('comentarios').value,

@@ -58,7 +58,7 @@ export class CrearOctubreComponent implements OnInit {
       fecha_futura: this.calls.calcularFechaFutura(
         this.octubreForm.get('fecha_actual').value,
         this.octubreForm.get('frecuencia_compra').value
-      ).toLocaleDateString(),
+      ),
       nombre_encargado: this.octubreForm.get('nombre_encargado').value,
       resultado: this.octubreForm.get('resultado').value,
       comentarios: this.octubreForm.get('comentarios').value,

@@ -58,8 +58,7 @@ export class CrearSeptiembreComponent implements OnInit {
         .calcularFechaFutura(
           this.septiembreForm.get('fecha_actual').value,
           this.septiembreForm.get('frecuencia_compra').value
-        )
-        .toLocaleDateString(),
+        ),
       nombre_encargado: this.septiembreForm.get('nombre_encargado').value,
       resultado: this.septiembreForm.get('resultado').value,
       comentarios: this.septiembreForm.get('comentarios').value,

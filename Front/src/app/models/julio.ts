@@ -6,7 +6,7 @@ export class Julio {
   ultima_fecha_llamada: Date;
   valor_compra: number;
   frecuencia_compra: number;
-  fecha_futura: string;
+  fecha_futura: Date;
   nombre_encargado: string;
   resultado: string;
   comentarios: string;
@@ -22,7 +22,7 @@ export class Julio {
     nombre_encargado: string,
     resultado: string,
     comentarios: string,
-    fecha_futura: string,
+    fecha_futura: Date,
     status: string
   ) {
     this.fecha_actual = fecha_actual;

@@ -58,8 +58,7 @@ export class CrearAbrilComponent implements OnInit {
         .calcularFechaFutura(
           this.abrilForm.get('fecha_actual').value,
           this.abrilForm.get('frecuencia_compra').value
-        )
-        .toLocaleDateString(),
+        ),
       nombre_encargado: this.abrilForm.get('nombre_encargado').value,
       resultado: this.abrilForm.get('resultado').value,
       comentarios: this.abrilForm.get('comentarios').value,

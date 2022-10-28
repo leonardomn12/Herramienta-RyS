@@ -58,8 +58,7 @@ export class CrearJunioComponent implements OnInit {
         .calcularFechaFutura(
           this.junioForm.get('fecha_actual').value,
           this.junioForm.get('frecuencia_compra').value
-        )
-        .toLocaleDateString(),
+        ),
       nombre_encargado: this.junioForm.get('nombre_encargado').value,
       resultado: this.junioForm.get('resultado').value,
       comentarios: this.junioForm.get('comentarios').value,

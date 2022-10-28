@@ -58,8 +58,7 @@ export class CrearMarzoComponent implements OnInit {
         .calcularFechaFutura(
           this.marzoForm.get('fecha_actual').value,
           this.marzoForm.get('frecuencia_compra').value
-        )
-        .toLocaleDateString(),
+        ),
       nombre_encargado: this.marzoForm.get('nombre_encargado').value,
       resultado: this.marzoForm.get('resultado').value,
       comentarios: this.marzoForm.get('comentarios').value,

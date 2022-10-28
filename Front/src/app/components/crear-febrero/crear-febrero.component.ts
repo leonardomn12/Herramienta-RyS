@@ -58,8 +58,7 @@ export class CrearFebreroComponent implements OnInit {
         .calcularFechaFutura(
           this.febreroForm.get('fecha_actual').value,
           this.febreroForm.get('frecuencia_compra').value
-        )
-        .toLocaleDateString(),
+        ),
       nombre_encargado: this.febreroForm.get('nombre_encargado').value,
       resultado: this.febreroForm.get('resultado').value,
       comentarios: this.febreroForm.get('comentarios').value,

@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-lg-12 mx-auto">
       <div class="card">
-        <div class="card-body text-center">
+        <div class="card-body text-center table-responsive">
           <span class="titulo">VENTAS DE DICIEMBRE</span>
           <button class="btn btn-danger float-end" routerLink="/crear-diciembre">NUEVO</button>
           <table *ngIf="listDiciembre.length > 0" class="table table-striped mt-3">
@@ -32,7 +32,7 @@
                 <th>{{diciembre.ultima_fecha_llamada | date: "dd/MM/yyyy"}}</th>
                 <th>{{diciembre.valor_compra | currency}}</th>
                 <!-- <th>{{diciembre.frecuencia_compra}}</th> -->
-                <th>{{diciembre.fecha_futura}}</th>
+                <th>{{diciembre.fecha_futura | date: "dd/MM/yyyy"}}</th>
                 <th>{{diciembre.nombre_encargado}}</th>
                 <th>{{diciembre.resultado}}</th>
                 <th>{{diciembre.comentarios}}</th>
