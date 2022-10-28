@@ -1,45 +1,52 @@
 <app-navbar></app-navbar>
 
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-lg-12 mx-auto">
-            <div class="card">
-                <div class="card-body text-center">
-                    <span class="titulo">VENTAS DE AGOSTO</span>
-                    <button class="btn btn-danger float-end" routerLink="/crear-agosto">NUEVO</button>
-                    <table *ngIf="listAgosto.length > 0" class="table table-striped mt-3">
-                        <thead>
-                          <tr>
-                            <th scope="col">Cliente</th>
-                            <th scope="col">Telefono</th>
-                            <th scope="col">Ultima fecha de compra</th>
-                            <th scope="col">Producto</th>
-                            <th scope="col">Ultima fecha de llamada</th>
-                            <th scope="col">Nombre del encargado RyS</th>
-                            <th scope="col">Resultados</th>
-                            <th scope="col">Comentarios</th>
-                            <th scope="col"></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        
-                          <tr *ngFor="let agosto of listAgosto">
-                            <th>{{agosto.nombre_cliente}}</th>
-                            <th>{{agosto.telefono_cliente}}</th>
-                            <th>{{agosto.ultima_fecha_compra}}</th>
-                            <th>{{agosto.producto}}</th>
-                            <th>{{agosto.ultima_fecha_llamada}}</th>
-                            <th>{{agosto.nombre_encargado}}</th>
-                            <th>{{agosto.resultado}}</th>
-                            <th>{{agosto.comentarios}}</th>
-                            <td><i  [routerLink]="['/editar-agosto', agosto._id]" class="fas fa-edit text-primary"></i>
-                              <i (click)="eliminarVenta(agosto._id)" class="fas fa-trash text-danger"></i></td>
-                          </tr>
-                        <h5 style="text-align: start; margin-top: 10px;" *ngIf="listAgosto.length == 0">No hay productos para mostrar</h5>
-                        </tbody>
-                      </table>
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-lg-12 mx-auto">
+      <div class="card">
+        <div class="card-body text-center table-responsive">
+          <span class="titulo">VENTAS DE AGOSTO</span>
+          <button class="btn btn-danger float-end" routerLink="/crear-agosto">NUEVO</button>
+          <table *ngIf="listAgosto.length > 0" class="table table-striped mt-3">
+            <thead>
+              <tr>
+                <th scope="col">Fecha</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Ultima fecha de llamada</th>
+                <th scope="col">Valor de compra</th>
+                <th scope="col">Próxima llamada</th>
+                <th scope="col">Nombre del encargado RyS</th>
+                <th scope="col">Resultados</th>
+                <th scope="col">Comentarios</th>
+                <th scope="col">Estado</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let agosto of listAgosto">
+                <th>{{agosto.fecha_actual | date: "dd/MM/yyyy"}}</th>
+                <th>{{agosto.nombre_cliente}}</th>
+                <th>{{agosto.telefono_cliente}}</th>
+                <th>{{agosto.ultima_fecha_llamada | date: "dd/MM/yyyy"}}</th>
+                <th>{{agosto.valor_compra | currency}}</th>
+                <!-- <th>{{agosto.frecuencia_compra}}</th> -->
+                <th>{{agosto.fecha_futura | date: "dd/MM/yyyy"}}</th>
+                <th>{{agosto.nombre_encargado}}</th>
+                <th>{{agosto.resultado}}</th>
+                <th>{{agosto.comentarios}}</th>
+                <th>{{agosto.status}}</th>
+                <td><i [routerLink]="['/editar-agosto', agosto._id]" class="fas fa-edit text-primary"></i>
+                  <i (click)="mostrarDialogo(agosto._id)" class="fas fa-trash text-danger"></i>
+                </td>
+              </tr>
+              <h5 style="text-align: start; margin-top: 10px;" *ngIf="listAgosto.length == 0">No hay productos para
+                mostrar</h5>
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
+  </div>
 </div>

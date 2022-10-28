@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { Noviembre } from 'src/app/models/noviembre';
 import { AppServiceService } from 'src/app/services/app-service.service';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-noviembre',
@@ -12,7 +14,7 @@ export class NoviembreComponent implements OnInit {
 
   listNoviembre: Noviembre [] = [];
 
-  constructor(private noviembreService: AppServiceService, private toastr: ToastrService) { }
+  constructor(private noviembreService: AppServiceService, private toastr: ToastrService, public dialogo: MatDialog) { }
 
   ngOnInit(): void {
     this.obtenerVentas();
@@ -27,6 +29,20 @@ export class NoviembreComponent implements OnInit {
     })
   }
 
+  mostrarDialogo(id:any): void {
+    this.dialogo
+      .open(ConfirmationDialogComponent, {
+        data: `¿Desea eliminar el registro?`
+      })
+      .afterClosed()
+      .subscribe((confirmado: Boolean) => {
+        if (confirmado) {
+          this.eliminarVenta(id);
+        } else {
+          this.obtenerVentas();
+        }
+      });
+  }
 
   eliminarVenta(id: any){
     this.noviembreService.deleteVentasNoviembre(id).subscribe(data => {

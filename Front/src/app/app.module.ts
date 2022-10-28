@@ -4,9 +4,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {
+  MatNativeDateModule,
+  MAT_DATE_LOCALE,
+  NativeDateAdapter,
+} from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { HttpClientModule } from '@angular/common/http';
 import { EneroComponent } from './components/enero/enero.component';
 import { ToastrModule } from 'ngx-toastr';
 import { CrearEneroComponent } from './components/crear-enero/crear-enero.component';
@@ -36,6 +46,8 @@ import { CrearSeptiembreComponent } from './components/crear-septiembre/crear-se
 import { CrearOctubreComponent } from './components/crear-octubre/crear-octubre.component';
 import { CrearNoviembreComponent } from './components/crear-noviembre/crear-noviembre.component';
 import { CrearDiciembreComponent } from './components/crear-diciembre/crear-diciembre.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { MatButton, MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -69,7 +81,8 @@ import { CrearDiciembreComponent } from './components/crear-diciembre/crear-dici
     CrearSeptiembreComponent,
     CrearOctubreComponent,
     CrearNoviembreComponent,
-    CrearDiciembreComponent
+    CrearDiciembreComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,9 +91,18 @@ import { CrearDiciembreComponent } from './components/crear-diciembre/crear-dici
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    MatButtonModule,
+    ToastrModule.forRoot(),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    NativeDateAdapter,
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

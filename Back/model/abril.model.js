@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const abril = mongoose.Schema({
+    fecha_actual: {
+        type: String,
+        required: true,
+        trim: true
+    },
     nombre_cliente: {
         type: String,
         required: true,
@@ -11,18 +16,23 @@ const abril = mongoose.Schema({
         required: true,
         trim: true
     },
-    ultima_fecha_compra: {
-        type: Date,
-        required: true,
-        trim: true
-    },
-    producto: {
+    ultima_fecha_llamada: {
         type: String,
         required: true,
         trim: true
     },
-    ultima_fecha_llamada: {
-        type: Date,
+    valor_compra: {
+        type: Number,
+        required: true,
+        trim: true
+    },
+    frecuencia_compra: {
+        type: Number,
+        required: true,
+        trim: true
+    },
+    fecha_futura: {
+        type: String,
         required: true,
         trim: true
     },
@@ -37,6 +47,10 @@ const abril = mongoose.Schema({
         trim: true
     },
     comentarios: {
+        type: String,
+        trim: true
+    },
+    status: {
         type: String,
         trim: true
     }

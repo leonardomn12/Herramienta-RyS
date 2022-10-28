@@ -6,44 +6,78 @@
                     <span class="titulo">{{titulo | uppercase}}</span>
                     <form class="mt-3" [formGroup]="eneroForm" (ngSubmit)="agregarRegistro()">
                         <div class="mb-3">
-                            <input type="text" formControlName="nombre_cliente" class="form-control form-control-lg" placeholder="Cliente">
-                            <div class="text-danger" *ngIf="eneroForm.get('nombre_cliente').hasError('required') && eneroForm.get('nombre_cliente').touched">
+                            <mat-form-field appearance="fill" class="form-control form-control-lg">
+                                <mat-label>Fecha actual</mat-label>
+                                <input matInput [matDatepicker]="fecha" formControlName="fecha_actual">
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matSuffix [for]="fecha"></mat-datepicker-toggle>
+                                <mat-datepicker #fecha></mat-datepicker>
+                            </mat-form-field>
+                            <div class="text-danger"
+                                *ngIf="eneroForm.get('fecha_actual').hasError('required') && eneroForm.get('fecha_actual').touched">
+                                <span>La fecha actual <strong>es obligatoria</strong></span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" formControlName="nombre_cliente" class="form-control form-control-lg"
+                                placeholder="Cliente">
+                            <div class="text-danger"
+                                *ngIf="eneroForm.get('nombre_cliente').hasError('required') && eneroForm.get('nombre_cliente').touched">
                                 <span>El nombre del cliente <strong>es obligatorio</strong></span>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <input type="number" formControlName="telefono_cliente" class="form-control form-control-lg" placeholder="Telefono del cliente">
-                            <div class="text-danger" *ngIf="eneroForm.get('telefono_cliente').hasError('required') && eneroForm.get('telefono_cliente').touched">
+                            <input type="number" formControlName="telefono_cliente" class="form-control form-control-lg"
+                                placeholder="Telefono del cliente">
+                            <div class="text-danger"
+                                *ngIf="eneroForm.get('telefono_cliente').hasError('required') && eneroForm.get('telefono_cliente').touched">
                                 <span>El telefono del cliente <strong>es obligatorio</strong></span>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <input type="text" formControlName="ultima_fecha_compra" class="form-control form-control-lg" placeholder="Ultima fecha de compra (AAAA-MM-DD)">
-                            <div class="text-danger" *ngIf="eneroForm.get('ultima_fecha_compra').hasError('required') && eneroForm.get('ultima_fecha_compra').touched">
-                                <span>La fecha de compra <strong>es obligatoria</strong></span>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" formControlName="producto" class="form-control form-control-lg" placeholder="Producto">
-                            <div class="text-danger" *ngIf="eneroForm.get('producto').hasError('required') && eneroForm.get('producto').touched">
-                                <span>El producto <strong>es obligatorio</strong></span>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" formControlName="ultima_fecha_llamada" class="form-control form-control-lg" placeholder="Ultima llamada realizada (AAAA-MM-DD)">
-                            <div class="text-danger" *ngIf="eneroForm.get('ultima_fecha_llamada').hasError('required') && eneroForm.get('ultima_fecha_llamada').touched">
+                            <mat-form-field appearance="fill" class="form-control form-control-lg">
+                                <mat-label>Fecha de la última llamada</mat-label>
+                                <input matInput [matDatepicker]="ultima_fecha" formControlName="ultima_fecha_llamada">
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matSuffix [for]="ultima_fecha"></mat-datepicker-toggle>
+                                <mat-datepicker #ultima_fecha></mat-datepicker>
+                            </mat-form-field>
+                            <div class="text-danger"
+                                *ngIf="eneroForm.get('ultima_fecha_llamada').hasError('required') && eneroForm.get('ultima_fecha_llamada').touched">
                                 <span>La fecha de llamada <strong>es obligatoria</strong></span>
                             </div>
                         </div>
+
                         <div class="mb-3">
-                            <input type="text" formControlName="nombre_encargado" class="form-control form-control-lg" placeholder="Encargado RyS">
-                            <div class="text-danger" *ngIf="eneroForm.get('nombre_encargado').hasError('required') && eneroForm.get('nombre_encargado').touched">
+                            <input type="number" formControlName="valor_compra" class="form-control form-control-lg"
+                                placeholder="Valor de la compra">
+                            <div class="text-danger"
+                                *ngIf="eneroForm.get('valor_compra').hasError('required') && eneroForm.get('valor_compra').touched">
+                                <span>El valor de la compra <strong>es obligatorio</strong></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="number" formControlName="frecuencia_compra"
+                                class="form-control form-control-lg" placeholder="Frecuencia de compra">
+                            <div class="text-danger"
+                                *ngIf="eneroForm.get('frecuencia_compra').hasError('required') && eneroForm.get('frecuencia_compra').touched">
+                                <span>La frecuencia de compra <strong>es obligatoria</strong></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="text" formControlName="nombre_encargado" class="form-control form-control-lg"
+                                placeholder="Encargado RyS">
+                            <div class="text-danger"
+                                *ngIf="eneroForm.get('nombre_encargado').hasError('required') && eneroForm.get('nombre_encargado').touched">
                                 <span>El nombre del encargado <strong>es obligatorio</strong></span>
                             </div>
                         </div>
                         <div class="mb-3">
                             <span>Resultado de la llamada</span>
-                            <select class="form-select" formControlName="resultado" aria-label="Default select example" aria-placeholder="Resultado de la llamada">
+                            <select class="form-select" formControlName="resultado" aria-label="Default select example"
+                                aria-placeholder="Resultado de la llamada">
                                 <!-- <option selected>Seleccione el resultado de la llamada</option>  -->
                                 <option>Llamada atendida pero no se le ofrece</option>
                                 <option>Llamada atendida y hace pedido</option>
@@ -54,16 +88,20 @@
                                 <option>Le compra a la competencia</option>
                             </select>
                             <!-- <input type="text" formControlName="resultado" class="form-control form-control-lg" placeholder="Resultado de la llamada"> -->
-                            <div class="text-danger" *ngIf="eneroForm.get('resultado').hasError('required') && eneroForm.get('resultado').touched">
+                            <div class="text-danger"
+                                *ngIf="eneroForm.get('resultado').hasError('required') && eneroForm.get('resultado').touched">
                                 <span>El resultado de la llamada <strong>es obligatorio</strong></span>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <input type="text" formControlName="comentarios" class="form-control form-control-lg" placeholder="Comentarios adicionales">
+                            <input type="text" formControlName="comentarios" class="form-control form-control-lg"
+                                placeholder="Comentarios adicionales">
                         </div>
                         <div class="mb-3">
-                            <button class="btn btn-secondary btn-lg float-start" routerLink="/ventas-enero">VOLVER</button>
-                            <button type="submit" class="btn btn-danger btn-lg float-end" [disabled]="eneroForm.invalid">CREAR</button>
+                            <button class="btn btn-secondary btn-lg float-start"
+                                routerLink="/ventas-enero">VOLVER</button>
+                            <button type="submit" class="btn btn-danger btn-lg float-end"
+                                [disabled]="eneroForm.invalid">CREAR</button>
                         </div>
                     </form>
                 </div>
@@ -71,4 +109,3 @@
         </div>
     </div>
 </div>
-
