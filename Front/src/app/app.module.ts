@@ -13,6 +13,7 @@ import {
 } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
@@ -45,6 +46,8 @@ import { CrearSeptiembreComponent } from './components/crear-septiembre/crear-se
 import { CrearOctubreComponent } from './components/crear-octubre/crear-octubre.component';
 import { CrearNoviembreComponent } from './components/crear-noviembre/crear-noviembre.component';
 import { CrearDiciembreComponent } from './components/crear-diciembre/crear-diciembre.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { MatButton, MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -79,6 +82,7 @@ import { CrearDiciembreComponent } from './components/crear-diciembre/crear-dici
     CrearOctubreComponent,
     CrearNoviembreComponent,
     CrearDiciembreComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,6 +95,8 @@ import { CrearDiciembreComponent } from './components/crear-diciembre/crear-dici
     MatNativeDateModule,
     MatInputModule,
     MatFormFieldModule,
+    MatDialogModule,
+    MatButtonModule,
     ToastrModule.forRoot(),
   ],
   providers: [

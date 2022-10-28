@@ -38,7 +38,7 @@
                 <th>{{junio.comentarios}}</th>
                 <th>{{junio.status}}</th>
                 <td><i [routerLink]="['/editar-junio', junio._id]" class="fas fa-edit text-primary"></i>
-                  <i (click)="eliminarVenta(junio._id)" class="fas fa-trash text-danger"></i>
+                  <i (click)="mostrarDialogo(junio._id)" class="fas fa-trash text-danger"></i>
                 </td>
               </tr>
               <h5 style="text-align: start; margin-top: 10px;" *ngIf="listJunio.length == 0">No hay productos para

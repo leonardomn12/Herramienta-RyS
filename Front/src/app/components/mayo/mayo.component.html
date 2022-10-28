@@ -38,7 +38,7 @@
                 <th>{{mayo.comentarios}}</th>
                 <th>{{mayo.status}}</th>
                 <td><i [routerLink]="['/editar-mayo', mayo._id]" class="fas fa-edit text-primary"></i>
-                  <i (click)="eliminarVenta(mayo._id)" class="fas fa-trash text-danger"></i>
+                  <i (click)="mostrarDialogo(mayo._id)" class="fas fa-trash text-danger"></i>
                 </td>
               </tr>
               <h5 style="text-align: start; margin-top: 10px;" *ngIf="listMayo.length == 0">No hay productos para

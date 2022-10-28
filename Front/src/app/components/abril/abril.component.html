@@ -38,7 +38,7 @@
                 <th>{{abril.comentarios}}</th>
                 <th>{{abril.status}}</th>
                 <td><i [routerLink]="['/editar-abril', abril._id]" class="fas fa-edit text-primary"></i>
-                  <i (click)="eliminarVenta(abril._id)" class="fas fa-trash text-danger"></i>
+                  <i (click)="mostrarDialogo(abril._id)" class="fas fa-trash text-danger"></i>
                 </td>
               </tr>
               <h5 style="text-align: start; margin-top: 10px;" *ngIf="listAbril.length == 0">No hay productos para

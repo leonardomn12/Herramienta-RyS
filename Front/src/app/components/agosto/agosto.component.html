@@ -38,7 +38,7 @@
                 <th>{{agosto.comentarios}}</th>
                 <th>{{agosto.status}}</th>
                 <td><i [routerLink]="['/editar-agosto', agosto._id]" class="fas fa-edit text-primary"></i>
-                  <i (click)="eliminarVenta(agosto._id)" class="fas fa-trash text-danger"></i>
+                  <i (click)="mostrarDialogo(agosto._id)" class="fas fa-trash text-danger"></i>
                 </td>
               </tr>
               <h5 style="text-align: start; margin-top: 10px;" *ngIf="listAgosto.length == 0">No hay productos para

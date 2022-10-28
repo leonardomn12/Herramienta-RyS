@@ -38,7 +38,7 @@
                 <th>{{enero.comentarios}}</th>
                 <th>{{enero.status}}</th>
                 <td><i [routerLink]="['/editar-registro', enero._id]" class="fas fa-edit text-primary"></i>
-                  <i (click)="eliminarVenta(enero._id)" class="fas fa-trash text-danger"></i>
+                  <i (click)="mostrarDialogo(enero._id)" class="fas fa-trash text-danger"></i>
                 </td>
               </tr>
               <h5 style="text-align: start; margin-top: 10px;" *ngIf="listEnero.length == 0">No hay productos para
