@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 import { ToastrService } from 'ngx-toastr';
 import { Cliente } from 'src/app/models/cliente';
 import { AppServiceService } from 'src/app/services/app-service.service';
@@ -12,6 +13,10 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 })
 export class ClientesComponent implements OnInit {
   listClientes: Cliente[] = [];
+  page_size = 10;
+  page_index = 1;
+  pageSizeOption = [10, 25, 50, 100];
+
 
   constructor(
     private clienteService: AppServiceService,
@@ -26,11 +31,13 @@ export class ClientesComponent implements OnInit {
   obtenerClientes() {
     this.clienteService.getVentasClientes().subscribe(
       (data) => {
-        console.log(data);
         this.listClientes = data;
       },
       (error) => {
-        console.log(error);
+        this.toastr.error(
+          'Error al obtener los datos',
+          'Error'
+        );
       }
     );
   }
@@ -60,8 +67,18 @@ export class ClientesComponent implements OnInit {
         this.obtenerClientes();
       },
       (error) => {
-        console.log(error);
+        this.toastr.error(
+          'Error al eliminar el registro',
+          'Error'
+        );;
       }
     );
   }
+
+  handlePage(e: PageEvent){
+    this.page_size = e.pageSize;
+    this.page_index = e.pageIndex + 1;
+  }
+
+  
 }
