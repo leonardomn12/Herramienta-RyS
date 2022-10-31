@@ -1,38 +1,45 @@
 <app-navbar></app-navbar>
 
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-lg-12 mx-auto">
-            <div class="card">
-                <div class="card-body text-center table-responsive">
-                    <span class="titulo">CLIENTES</span>
-                    <button class="btn btn-danger float-end" routerLink="/crear-cliente">NUEVO</button>
-                    <table *ngIf="listClientes.length > 0" class="table table-striped mt-3">
-                        <thead>
-                          <tr>
-                            <th scope="col">Cliente</th>
-                            <th scope="col">Encargado de las compras</th>
-                            <th scope="col">Correo electrónico</th>
-                            <th scope="col">Celular</th>
-                            <th scope="col"></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        
-                          <tr *ngFor="let cliente of listClientes">
-                            <th>{{cliente.nombre_cliente}}</th>
-                            <th>{{cliente.nombre_encargado}}</th>
-                            <th>{{cliente.correo}}</th>
-                            <th>{{cliente.celular}}</th>
-                            
-                            <td><i  [routerLink]="['/editar-cliente', cliente._id]" class="fas fa-edit text-primary"></i>
-                              <i (click)="eliminarCliente(cliente._id)" class="fas fa-trash text-danger"></i></td>
-                          </tr>
-                        <h5 style="text-align: start; margin-top: 10px;" *ngIf="listClientes.length == 0">No hay productos para mostrar</h5>
-                        </tbody>
-                      </table>
-                </div>
-            </div>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-lg-12 mx-auto">
+      <div class="card">
+        <div class="card-body text-center table-responsive">
+          <span class="titulo">CLIENTES</span>
+          <button class="btn btn-danger float-end" routerLink="/crear-cliente">NUEVO</button>
+          <table *ngIf="listClientes.length > 0" class="table table-striped mt-3">
+            <thead>
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Identificacion</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Ciudad</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let cliente of listClientes | paginate:page_size:page_index">
+                <th>{{cliente.nombre_cliente}}</th>
+                <th>{{cliente.identificacion}}</th>
+                <th>{{cliente.direccion}}</th>
+                <th>{{cliente.telefono}}</th>
+                <th>{{cliente.ciudad}}</th>
+
+                <td><i [routerLink]="['/editar-cliente', cliente._id]" class="fas fa-edit text-primary"></i>
+                  <i (click)="mostrarDialogo(cliente._id)" class="fas fa-trash text-danger"></i>
+                </td>
+              </tr>
+              <h5 style="text-align: start; margin-top: 10px;" *ngIf="listClientes.length == 0">No hay productos para
+                mostrar</h5>
+            </tbody>
+          </table>
+          <mat-paginator [length]="listClientes.length" [pageSize]="page_size" [pageSizeOptions]="pageSizeOption"
+            (page)="handlePage($event)" showFirstLastButtons>
+          </mat-paginator>
         </div>
+      </div>
     </div>
+  </div>
 </div>

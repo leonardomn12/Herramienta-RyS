@@ -14,6 +14,7 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
@@ -48,6 +49,7 @@ import { CrearNoviembreComponent } from './components/crear-noviembre/crear-novi
 import { CrearDiciembreComponent } from './components/crear-diciembre/crear-diciembre.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { MatButton, MatButtonModule } from '@angular/material/button';
+import { PaginatePipe } from './pipes/paginate.pipe';
 
 @NgModule({
   declarations: [
@@ -83,6 +85,7 @@ import { MatButton, MatButtonModule } from '@angular/material/button';
     CrearNoviembreComponent,
     CrearDiciembreComponent,
     ConfirmationDialogComponent,
+    PaginatePipe,
   ],
   imports: [
     BrowserModule,
@@ -97,6 +100,7 @@ import { MatButton, MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatDialogModule,
     MatButtonModule,
+    MatPaginatorModule,
     ToastrModule.forRoot(),
   ],
   providers: [
