@@ -22,7 +22,7 @@ export class CrearJulioComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private julioService: AppServiceService,
-    private aRouter: ActivatedRoute,
+    private aRouter: ActivatedRoute
   ) {
     this.julioForm = this.fb.group({
       fecha_actual: ['', Validators.required],
@@ -34,6 +34,7 @@ export class CrearJulioComponent implements OnInit {
       nombre_encargado: ['', Validators.required],
       resultado: ['', Validators.required],
       comentarios: ['', Validators.nullValidator],
+      status: ['', Validators.required],
     });
     this.id = this.aRouter.snapshot.paramMap.get('id');
   }
@@ -43,8 +44,6 @@ export class CrearJulioComponent implements OnInit {
   }
 
   agregarRegistro() {
-    console.log(this.julioForm);
-
     const julio: Julio = {
       fecha_actual: this.julioForm.get('fecha_actual').value,
       nombre_cliente: this.julioForm.get('nombre_cliente').value,
@@ -54,25 +53,18 @@ export class CrearJulioComponent implements OnInit {
       ),
       valor_compra: this.julioForm.get('valor_compra').value,
       frecuencia_compra: this.julioForm.get('frecuencia_compra').value,
-      fecha_futura: this.calls
-        .calcularFechaFutura(
-          this.julioForm.get('fecha_actual').value,
-          this.julioForm.get('frecuencia_compra').value
-        ),
+      fecha_futura: this.calls.calcularFechaFutura(
+        this.julioForm.get('fecha_actual').value,
+        this.julioForm.get('frecuencia_compra').value
+      ),
       nombre_encargado: this.julioForm.get('nombre_encargado').value,
       resultado: this.julioForm.get('resultado').value,
       comentarios: this.julioForm.get('comentarios').value,
-      status: this.calls.getCallStatus(
-        this.calls.calcularFechaFutura(
-          this.julioForm.get('fecha_actual').value,
-          this.julioForm.get('frecuencia_compra').value
-        )
-      ),
+      status: this.julioForm.get('status').value,
     };
 
     if (this.id != null) {
       //Editar
-
       this.julioService.editProductJulio(this.id, julio).subscribe(
         (data) => {
           this.toastr.success(
@@ -82,13 +74,12 @@ export class CrearJulioComponent implements OnInit {
           this.router.navigateByUrl('/ventas-julio');
         },
         (error) => {
-          console.log(error);
+          this.toastr.error('Error al editar el registro', 'Error');
           this.julioForm.reset();
         }
       );
     } else {
       //Agregar
-      console.log(julio);
       this.julioService.createRegistroJulio(julio).subscribe(
         (data) => {
           this.toastr.success(
@@ -98,7 +89,7 @@ export class CrearJulioComponent implements OnInit {
           this.router.navigateByUrl('/ventas-julio');
         },
         (error) => {
-          console.log(error);
+          this.toastr.error('Error al crear el registro', 'Error');
           this.julioForm.reset();
         }
       );
@@ -119,6 +110,7 @@ export class CrearJulioComponent implements OnInit {
           nombre_encargado: data.nombre_encargado,
           resultado: data.resultado,
           comentarios: data.comentarios,
+          status: data.status,
         });
       });
     }

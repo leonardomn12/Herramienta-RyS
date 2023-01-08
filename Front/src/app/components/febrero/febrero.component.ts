@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 import { ToastrService } from 'ngx-toastr';
 import { Febrero } from 'src/app/models/febrero';
 import { AppServiceService } from 'src/app/services/app-service.service';
@@ -12,6 +13,9 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 })
 export class FebreroComponent implements OnInit {
   listFebrero: Febrero[] = [];
+  page_size = 10;
+  page_index = 1;
+  pageSizeOption = [10, 25, 50, 100];
 
   constructor(
     private febreroService: AppServiceService,
@@ -26,11 +30,13 @@ export class FebreroComponent implements OnInit {
   obtenerVentas() {
     this.febreroService.getVentasFebrero().subscribe(
       (data) => {
-        console.log(data);
         this.listFebrero = data;
       },
       (error) => {
-        console.log(error);
+        this.toastr.error(
+          'Error al obtener los datos',
+          'Error'
+        );
       }
     );
   }
@@ -60,8 +66,13 @@ export class FebreroComponent implements OnInit {
         this.obtenerVentas();
       },
       (error) => {
-        console.log(error);
+        this.toastr.error('Error al eliminar el registro', 'Error');
       }
     );
+  }
+
+  handlePage(e: PageEvent){
+    this.page_size = e.pageSize;
+    this.page_index = e.pageIndex + 1;
   }
 }

@@ -34,6 +34,7 @@ export class CrearNoviembreComponent implements OnInit {
       nombre_encargado: ['', Validators.required],
       resultado: ['', Validators.required],
       comentarios: ['', Validators.nullValidator],
+      status: ['', Validators.required]
     });
     this.id = this.aRouter.snapshot.paramMap.get('id');
   }
@@ -43,8 +44,6 @@ export class CrearNoviembreComponent implements OnInit {
   }
 
   agregarRegistro() {
-    console.log(this.noviembreForm);
-
     const noviembre: Noviembre = {
       fecha_actual: this.noviembreForm.get('fecha_actual').value,
       nombre_cliente: this.noviembreForm.get('nombre_cliente').value,
@@ -62,12 +61,7 @@ export class CrearNoviembreComponent implements OnInit {
       nombre_encargado: this.noviembreForm.get('nombre_encargado').value,
       resultado: this.noviembreForm.get('resultado').value,
       comentarios: this.noviembreForm.get('comentarios').value,
-      status: this.calls.getCallStatus(
-        this.calls.calcularFechaFutura(
-          this.noviembreForm.get('fecha_actual').value,
-          this.noviembreForm.get('frecuencia_compra').value
-        )
-      ),
+      status: this.noviembreForm.get('status').value
     };
 
     if (this.id != null) {
@@ -82,13 +76,12 @@ export class CrearNoviembreComponent implements OnInit {
           this.router.navigateByUrl('/ventas-noviembre');
         },
         (error) => {
-          console.log(error);
+          this.toastr.error('Error al editar el registro', 'Error');
           this.noviembreForm.reset();
         }
       );
     } else {
       //Agregar
-      console.log(noviembre);
       this.noviembreService.createRegistroNoviembre(noviembre).subscribe(
         (data) => {
           this.toastr.success(
@@ -98,7 +91,7 @@ export class CrearNoviembreComponent implements OnInit {
           this.router.navigateByUrl('/ventas-noviembre');
         },
         (error) => {
-          console.log(error);
+          this.toastr.error('Error al crear el registro', 'Error');
           this.noviembreForm.reset();
         }
       );
@@ -119,6 +112,7 @@ export class CrearNoviembreComponent implements OnInit {
           nombre_encargado: data.nombre_encargado,
           resultado: data.resultado,
           comentarios: data.comentarios,
+          status: data.status
         });
       });
     }

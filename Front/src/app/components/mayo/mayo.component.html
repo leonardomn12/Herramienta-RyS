@@ -25,7 +25,7 @@
             </thead>
             <tbody>
 
-              <tr *ngFor="let mayo of listMayo">
+              <tr *ngFor="let mayo of listMayo | paginate:page_size:page_index">
                 <th>{{mayo.fecha_actual | date: "dd/MM/yyyy"}}</th>
                 <th>{{mayo.nombre_cliente}}</th>
                 <th>{{mayo.telefono_cliente}}</th>
@@ -45,6 +45,9 @@
                 mostrar</h5>
             </tbody>
           </table>
+          <mat-paginator [length]="listMayo.length" [pageSize]="page_size" [pageSizeOptions]="pageSizeOption"
+            (page)="handlePage($event)" showFirstLastButtons>
+          </mat-paginator>
         </div>
       </div>
     </div>

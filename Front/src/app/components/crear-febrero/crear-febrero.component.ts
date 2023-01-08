@@ -34,6 +34,7 @@ export class CrearFebreroComponent implements OnInit {
       nombre_encargado: ['', Validators.required],
       resultado: ['', Validators.required],
       comentarios: ['', Validators.nullValidator],
+      status: ['', Validators.required]
     });
     this.id = this.aRouter.snapshot.paramMap.get('id');
   }
@@ -43,8 +44,6 @@ export class CrearFebreroComponent implements OnInit {
   }
 
   agregarRegistro() {
-    console.log(this.febreroForm);
-
     const febrero: Febrero = {
       fecha_actual: this.febreroForm.get('fecha_actual').value,
       nombre_cliente: this.febreroForm.get('nombre_cliente').value,
@@ -62,12 +61,7 @@ export class CrearFebreroComponent implements OnInit {
       nombre_encargado: this.febreroForm.get('nombre_encargado').value,
       resultado: this.febreroForm.get('resultado').value,
       comentarios: this.febreroForm.get('comentarios').value,
-      status: this.calls.getCallStatus(
-        this.calls.calcularFechaFutura(
-          this.febreroForm.get('fecha_actual').value,
-          this.febreroForm.get('frecuencia_compra').value
-        )
-      ),
+      status: this.febreroForm.get('status').value
     };
 
     if (this.id != null) {
@@ -82,13 +76,12 @@ export class CrearFebreroComponent implements OnInit {
           this.router.navigateByUrl('/ventas-febrero');
         },
         (error) => {
-          console.log(error);
+          this.toastr.error('Error al editar el registro', 'Error');
           this.febreroForm.reset();
         }
       );
     } else {
       //Agregar
-      console.log(febrero);
       this.febreroService.createRegistroFebrero(febrero).subscribe(
         (data) => {
           this.toastr.success(
@@ -98,7 +91,7 @@ export class CrearFebreroComponent implements OnInit {
           this.router.navigateByUrl('/ventas-febrero');
         },
         (error) => {
-          console.log(error);
+          this.toastr.error('Error al crear el registro', 'Error');
           this.febreroForm.reset();
         }
       );
@@ -110,6 +103,7 @@ export class CrearFebreroComponent implements OnInit {
       this.titulo = 'Editar Registro';
       this.febreroService.getRegistroFebrero(this.id).subscribe((data) => {
         this.febreroForm.setValue({
+          fecha_actual: data.fecha_actual,
           nombre_cliente: data.nombre_cliente,
           telefono_cliente: data.telefono_cliente,
           ultima_fecha_llamada: data.ultima_fecha_llamada,
@@ -118,6 +112,7 @@ export class CrearFebreroComponent implements OnInit {
           nombre_encargado: data.nombre_encargado,
           resultado: data.resultado,
           comentarios: data.comentarios,
+          status: data.status
         });
       });
     }

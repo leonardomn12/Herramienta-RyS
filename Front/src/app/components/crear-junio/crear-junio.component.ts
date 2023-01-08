@@ -34,6 +34,7 @@ export class CrearJunioComponent implements OnInit {
       nombre_encargado: ['', Validators.required],
       resultado: ['', Validators.required],
       comentarios: ['', Validators.nullValidator],
+      status: ['', Validators.required]
     });
     this.id = this.aRouter.snapshot.paramMap.get('id');
   }
@@ -43,8 +44,6 @@ export class CrearJunioComponent implements OnInit {
   }
 
   agregarRegistro() {
-    console.log(this.junioForm);
-
     const junio: Junio = {
       fecha_actual: this.junioForm.get('fecha_actual').value,
       nombre_cliente: this.junioForm.get('nombre_cliente').value,
@@ -62,12 +61,7 @@ export class CrearJunioComponent implements OnInit {
       nombre_encargado: this.junioForm.get('nombre_encargado').value,
       resultado: this.junioForm.get('resultado').value,
       comentarios: this.junioForm.get('comentarios').value,
-      status: this.calls.getCallStatus(
-        this.calls.calcularFechaFutura(
-          this.junioForm.get('fecha_actual').value,
-          this.junioForm.get('frecuencia_compra').value
-        )
-      ),
+      status: this.junioForm.get('status').value
     };
 
     if (this.id != null) {
@@ -82,13 +76,12 @@ export class CrearJunioComponent implements OnInit {
           this.router.navigateByUrl('/ventas-junio');
         },
         (error) => {
-          console.log(error);
+          this.toastr.error('Error al editar el registro', 'Error');
           this.junioForm.reset();
         }
       );
     } else {
       //Agregar
-      console.log(junio);
       this.junioService.createRegistroJunio(junio).subscribe(
         (data) => {
           this.toastr.success(
@@ -98,7 +91,7 @@ export class CrearJunioComponent implements OnInit {
           this.router.navigateByUrl('/ventas-junio');
         },
         (error) => {
-          console.log(error);
+          this.toastr.error('Error al crear el registro', 'Error');
           this.junioForm.reset();
         }
       );
@@ -119,6 +112,7 @@ export class CrearJunioComponent implements OnInit {
           nombre_encargado: data.nombre_encargado,
           resultado: data.resultado,
           comentarios: data.comentarios,
+          status: data.status
         });
       });
     }

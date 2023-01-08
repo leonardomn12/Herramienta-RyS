@@ -34,6 +34,7 @@ export class CrearMayoComponent implements OnInit {
       nombre_encargado: ['', Validators.required],
       resultado: ['', Validators.required],
       comentarios: ['', Validators.nullValidator],
+      status: ['', Validators.required]
     });
     this.id = this.aRouter.snapshot.paramMap.get('id');
   }
@@ -43,8 +44,6 @@ export class CrearMayoComponent implements OnInit {
   }
 
   agregarRegistro() {
-    console.log(this.mayoForm);
-
     const mayo: Mayo = {
       fecha_actual: this.mayoForm.get('fecha_actual').value,
       nombre_cliente: this.mayoForm.get('nombre_cliente').value,
@@ -62,12 +61,7 @@ export class CrearMayoComponent implements OnInit {
       nombre_encargado: this.mayoForm.get('nombre_encargado').value,
       resultado: this.mayoForm.get('resultado').value,
       comentarios: this.mayoForm.get('comentarios').value,
-      status: this.calls.getCallStatus(
-        this.calls.calcularFechaFutura(
-          this.mayoForm.get('fecha_actual').value,
-          this.mayoForm.get('frecuencia_compra').value
-        )
-      ),
+      status: this.mayoForm.get('status').value
     };
 
     if (this.id != null) {
@@ -82,13 +76,12 @@ export class CrearMayoComponent implements OnInit {
           this.router.navigateByUrl('/ventas-mayo');
         },
         (error) => {
-          console.log(error);
+          this.toastr.error('Error al editar el registro', 'Error');
           this.mayoForm.reset();
         }
       );
     } else {
       //Agregar
-      console.log(mayo);
       this.mayoService.createRegistroMayo(mayo).subscribe(
         (data) => {
           this.toastr.success(
@@ -98,7 +91,7 @@ export class CrearMayoComponent implements OnInit {
           this.router.navigateByUrl('/ventas-mayo');
         },
         (error) => {
-          console.log(error);
+          this.toastr.error('Error al crear el registro', 'Error');
           this.mayoForm.reset();
         }
       );
@@ -119,6 +112,7 @@ export class CrearMayoComponent implements OnInit {
           nombre_encargado: data.nombre_encargado,
           resultado: data.resultado,
           comentarios: data.comentarios,
+          status: data.status
         });
       });
     }

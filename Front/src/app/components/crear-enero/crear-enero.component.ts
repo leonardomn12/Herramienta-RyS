@@ -15,7 +15,6 @@ export class CrearEneroComponent implements OnInit {
   eneroForm: FormGroup;
   titulo = 'Crear registro';
   id: string;
-  // fecha_actual = new Date();
   calls = new Calls();
 
   constructor(
@@ -35,6 +34,7 @@ export class CrearEneroComponent implements OnInit {
       nombre_encargado: ['', Validators.required],
       resultado: ['', Validators.required],
       comentarios: ['', Validators.nullValidator],
+      status: ['', Validators.required]
     });
     this.id = this.aRouter.snapshot.paramMap.get('id');
   }
@@ -44,8 +44,6 @@ export class CrearEneroComponent implements OnInit {
   }
 
   agregarRegistro() {
-    console.log(this.eneroForm);
-
     const enero: Enero = {
       fecha_actual: this.eneroForm.get('fecha_actual').value,
       nombre_cliente: this.eneroForm.get('nombre_cliente').value,
@@ -61,12 +59,7 @@ export class CrearEneroComponent implements OnInit {
       nombre_encargado: this.eneroForm.get('nombre_encargado').value,
       resultado: this.eneroForm.get('resultado').value,
       comentarios: this.eneroForm.get('comentarios').value,
-      status: this.calls.getCallStatus(
-        this.calls.calcularFechaFutura(
-          this.eneroForm.get('fecha_actual').value,
-          this.eneroForm.get('frecuencia_compra').value
-        )
-      ),
+      status: this.eneroForm.get('status').value
     };
 
     if (this.id != null) {
@@ -81,13 +74,12 @@ export class CrearEneroComponent implements OnInit {
           this.router.navigateByUrl('/ventas-enero');
         },
         (error) => {
-          console.log(error);
+          this.toastr.error('Error al editar el registro', 'Error');
           this.eneroForm.reset();
         }
       );
     } else {
       //Agregar
-      console.log(enero);
       this.eneroService.createRegistroEnero(enero).subscribe(
         (data) => {
           this.toastr.success(
@@ -97,7 +89,7 @@ export class CrearEneroComponent implements OnInit {
           this.router.navigateByUrl('/ventas-enero');
         },
         (error) => {
-          console.log(error);
+          this.toastr.error('Error al crear el registro', 'Error');
           this.eneroForm.reset();
         }
       );
@@ -118,6 +110,7 @@ export class CrearEneroComponent implements OnInit {
           nombre_encargado: data.nombre_encargado,
           resultado: data.resultado,
           comentarios: data.comentarios,
+          status: data.status
         });
       });
     }
