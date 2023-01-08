@@ -34,6 +34,7 @@ export class CrearSeptiembreComponent implements OnInit {
       nombre_encargado: ['', Validators.required],
       resultado: ['', Validators.required],
       comentarios: ['', Validators.nullValidator],
+      status: ['', Validators.required]
     });
     this.id = this.aRouter.snapshot.paramMap.get('id');
   }
@@ -43,8 +44,6 @@ export class CrearSeptiembreComponent implements OnInit {
   }
 
   agregarRegistro() {
-    console.log(this.septiembreForm);
-
     const septiembre: Septiembre = {
       fecha_actual: this.septiembreForm.get('fecha_actual').value,
       nombre_cliente: this.septiembreForm.get('nombre_cliente').value,
@@ -62,17 +61,11 @@ export class CrearSeptiembreComponent implements OnInit {
       nombre_encargado: this.septiembreForm.get('nombre_encargado').value,
       resultado: this.septiembreForm.get('resultado').value,
       comentarios: this.septiembreForm.get('comentarios').value,
-      status: this.calls.getCallStatus(
-        this.calls.calcularFechaFutura(
-          this.septiembreForm.get('fecha_actual').value,
-          this.septiembreForm.get('frecuencia_compra').value
-        )
-      ),
+      status: this.septiembreForm.get('status').value
     };
 
     if (this.id != null) {
       //Editar
-
       this.septiembreService.editProductSeptiembre(this.id, septiembre).subscribe(
         (data) => {
           this.toastr.success(
@@ -82,13 +75,12 @@ export class CrearSeptiembreComponent implements OnInit {
           this.router.navigateByUrl('/ventas-septiembre');
         },
         (error) => {
-          console.log(error);
+          this.toastr.error('Error al editar el registro', 'Error');
           this.septiembreForm.reset();
         }
       );
     } else {
       //Agregar
-      console.log(septiembre);
       this.septiembreService.createRegistroSeptiembre(septiembre).subscribe(
         (data) => {
           this.toastr.success(
@@ -98,7 +90,7 @@ export class CrearSeptiembreComponent implements OnInit {
           this.router.navigateByUrl('/ventas-septiembre');
         },
         (error) => {
-          console.log(error);
+          this.toastr.error('Error al crear el registro', 'Error');
           this.septiembreForm.reset();
         }
       );
@@ -119,6 +111,7 @@ export class CrearSeptiembreComponent implements OnInit {
           nombre_encargado: data.nombre_encargado,
           resultado: data.resultado,
           comentarios: data.comentarios,
+          status: data.status
         });
       });
     }

@@ -25,7 +25,7 @@
             </thead>
             <tbody>
 
-              <tr *ngFor="let noviembre of listNoviembre">
+              <tr *ngFor="let noviembre of listNoviembre | paginate:page_size:page_index">
                 <th>{{noviembre.fecha_actual | date: "dd/MM/yyyy"}}</th>
                 <th>{{noviembre.nombre_cliente}}</th>
                 <th>{{noviembre.telefono_cliente}}</th>
@@ -45,6 +45,9 @@
                 mostrar</h5>
             </tbody>
           </table>
+          <mat-paginator [length]="listNoviembre.length" [pageSize]="page_size" [pageSizeOptions]="pageSizeOption"
+            (page)="handlePage($event)" showFirstLastButtons>
+          </mat-paginator>
         </div>
       </div>
     </div>

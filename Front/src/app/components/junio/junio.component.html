@@ -25,7 +25,7 @@
             </thead>
             <tbody>
 
-              <tr *ngFor="let junio of listJunio">
+              <tr *ngFor="let junio of listJunio | paginate:page_size:page_index">
                 <th>{{junio.fecha_actual | date: "dd/MM/yyyy"}}</th>
                 <th>{{junio.nombre_cliente}}</th>
                 <th>{{junio.telefono_cliente}}</th>
@@ -45,6 +45,9 @@
                 mostrar</h5>
             </tbody>
           </table>
+          <mat-paginator [length]="listJunio.length" [pageSize]="page_size" [pageSizeOptions]="pageSizeOption"
+            (page)="handlePage($event)" showFirstLastButtons>
+          </mat-paginator>
         </div>
       </div>
     </div>

@@ -34,6 +34,7 @@ export class CrearAbrilComponent implements OnInit {
       nombre_encargado: ['', Validators.required],
       resultado: ['', Validators.required],
       comentarios: ['', Validators.nullValidator],
+      status: ['', Validators.required]
     });
     this.id = this.aRouter.snapshot.paramMap.get('id');
   }
@@ -43,8 +44,6 @@ export class CrearAbrilComponent implements OnInit {
   }
 
   agregarRegistro() {
-    console.log(this.abrilForm);
-
     const abril: Abril = {
       fecha_actual: this.abrilForm.get('fecha_actual').value,
       nombre_cliente: this.abrilForm.get('nombre_cliente').value,
@@ -62,12 +61,7 @@ export class CrearAbrilComponent implements OnInit {
       nombre_encargado: this.abrilForm.get('nombre_encargado').value,
       resultado: this.abrilForm.get('resultado').value,
       comentarios: this.abrilForm.get('comentarios').value,
-      status: this.calls.getCallStatus(
-        this.calls.calcularFechaFutura(
-          this.abrilForm.get('fecha_actual').value,
-          this.abrilForm.get('frecuencia_compra').value
-        )
-      ),
+      status: this.abrilForm.get('status').value
     };
 
     if (this.id != null) {
@@ -82,13 +76,12 @@ export class CrearAbrilComponent implements OnInit {
           this.router.navigateByUrl('/ventas-abril');
         },
         (error) => {
-          console.log(error);
+          this.toastr.error('Error al editar el registro', 'Error');
           this.abrilForm.reset();
         }
       );
     } else {
-      //Agregar
-      console.log(abril);
+      //Agregar 
       this.abrilService.createRegistroAbril(abril).subscribe(
         (data) => {
           this.toastr.success(
@@ -98,7 +91,7 @@ export class CrearAbrilComponent implements OnInit {
           this.router.navigateByUrl('/ventas-abril');
         },
         (error) => {
-          console.log(error);
+          this.toastr.error('Error al crear el registro', 'Error');
           this.abrilForm.reset();
         }
       );
@@ -119,6 +112,7 @@ export class CrearAbrilComponent implements OnInit {
           nombre_encargado: data.nombre_encargado,
           resultado: data.resultado,
           comentarios: data.comentarios,
+          status: data.status
         });
       });
     }

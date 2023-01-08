@@ -34,6 +34,7 @@ export class CrearDiciembreComponent implements OnInit {
       nombre_encargado: ['', Validators.required],
       resultado: ['', Validators.required],
       comentarios: ['', Validators.nullValidator],
+      status: ['', Validators.required]
     });
     this.id = this.aRouter.snapshot.paramMap.get('id');
   }
@@ -43,8 +44,6 @@ export class CrearDiciembreComponent implements OnInit {
   }
 
   agregarRegistro() {
-    console.log(this.diciembreForm);
-
     const diciembre: Diciembre = {
       fecha_actual: this.diciembreForm.get('fecha_actual').value,
       nombre_cliente: this.diciembreForm.get('nombre_cliente').value,
@@ -62,12 +61,7 @@ export class CrearDiciembreComponent implements OnInit {
       nombre_encargado: this.diciembreForm.get('nombre_encargado').value,
       resultado: this.diciembreForm.get('resultado').value,
       comentarios: this.diciembreForm.get('comentarios').value,
-      status: this.calls.getCallStatus(
-        this.calls.calcularFechaFutura(
-          this.diciembreForm.get('fecha_actual').value,
-          this.diciembreForm.get('frecuencia_compra').value
-        )
-      ),
+      status: this.diciembreForm.get('status').value
     };
 
     if (this.id != null) {
@@ -82,13 +76,12 @@ export class CrearDiciembreComponent implements OnInit {
           this.router.navigateByUrl('/ventas-diciembre');
         },
         (error) => {
-          console.log(error);
+          this.toastr.error('Error al editar el registro', 'Error');
           this.diciembreForm.reset();
         }
       );
     } else {
       //Agregar
-      console.log(diciembre);
       this.diciembreService.createRegistroDiciembre(diciembre).subscribe(
         (data) => {
           this.toastr.success(
@@ -98,7 +91,7 @@ export class CrearDiciembreComponent implements OnInit {
           this.router.navigateByUrl('/ventas-diciembre');
         },
         (error) => {
-          console.log(error);
+          this.toastr.error('Error al crear el registro', 'Error');
           this.diciembreForm.reset();
         }
       );
@@ -119,6 +112,7 @@ export class CrearDiciembreComponent implements OnInit {
           nombre_encargado: data.nombre_encargado,
           resultado: data.resultado,
           comentarios: data.comentarios,
+          status: data.status
         });
       });
     }

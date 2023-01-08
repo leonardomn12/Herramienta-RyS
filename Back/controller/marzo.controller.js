@@ -42,7 +42,7 @@ exports.updateMarzo = async (req, res) => {
             comentarios,
             status
         } = req.body
-        let marzo = await marzo.findById(req.params.id)
+        let marzo = await Marzo.findById(req.params.id)
 
         if (!marzo) {
             res.status(404).json({

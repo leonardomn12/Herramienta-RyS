@@ -9,7 +9,7 @@
                             <mat-form-field appearance="fill" class="form-control form-control-lg">
                                 <mat-label>Fecha actual</mat-label>
                                 <input matInput [matDatepicker]="fecha" formControlName="fecha_actual">
-                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-hint>DD/MM/YYYY</mat-hint>
                                 <mat-datepicker-toggle matSuffix [for]="fecha"></mat-datepicker-toggle>
                                 <mat-datepicker #fecha></mat-datepicker>
                             </mat-form-field>
@@ -38,7 +38,7 @@
                             <mat-form-field appearance="fill" class="form-control form-control-lg">
                                 <mat-label>Fecha de la última llamada</mat-label>
                                 <input matInput [matDatepicker]="ultima_fecha" formControlName="ultima_fecha_llamada">
-                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-hint>DD/MM/YYYY</mat-hint>
                                 <mat-datepicker-toggle matSuffix [for]="ultima_fecha"></mat-datepicker-toggle>
                                 <mat-datepicker #ultima_fecha></mat-datepicker>
                             </mat-form-field>
@@ -97,6 +97,18 @@
                             <input type="text" formControlName="comentarios" class="form-control form-control-lg"
                                 placeholder="Comentarios adicionales">
                         </div>
+                        <div class="mb-3">
+                            <span>Estado</span>
+                            <select class="form-select" formControlName="status" aria-label="Default select example"
+                                aria-placeholder="Estado">
+                                <option>PENDIENTE</option>
+                                <option>ATENDIDO</option>
+                            </select>
+                            <div class="text-danger"
+                                *ngIf="mayoForm.get('status').hasError('required') && mayoForm.get('status').touched">
+                                <span>El estado <strong>es obligatorio</strong></span>
+                            </div>
+                          </div>
                         <div class="mb-3">
                             <button class="btn btn-secondary btn-lg float-start"
                                 routerLink="/ventas-mayo">VOLVER</button>

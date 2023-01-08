@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 import { ToastrService } from 'ngx-toastr';
 import { Agosto } from 'src/app/models/agosto';
 import { AppServiceService } from 'src/app/services/app-service.service';
@@ -12,6 +13,9 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 })
 export class AgostoComponent implements OnInit {
   listAgosto: Agosto[] = [];
+  page_size = 10;
+  page_index = 1;
+  pageSizeOption = [10, 25, 50, 100];
 
   constructor(
     private agostoService: AppServiceService,
@@ -26,11 +30,13 @@ export class AgostoComponent implements OnInit {
   obtenerVentas() {
     this.agostoService.getVentasAgosto().subscribe(
       (data) => {
-        console.log(data);
         this.listAgosto = data;
       },
       (error) => {
-        console.log(error);
+        this.toastr.error(
+          'Error al obtener los datos',
+          'Error'
+        );
       }
     );
   }
@@ -60,8 +66,14 @@ export class AgostoComponent implements OnInit {
         this.obtenerVentas();
       },
       (error) => {
-        console.log(error);
+        this.toastr.error('Error al eliminar el registro', 'Error');
       }
     );
   }
+
+  handlePage(e: PageEvent){
+    this.page_size = e.pageSize;
+    this.page_index = e.pageIndex + 1;
+  }
+
 }

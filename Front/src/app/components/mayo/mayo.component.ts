@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 import { ToastrService } from 'ngx-toastr';
 import { Mayo } from 'src/app/models/mayo';
 import { AppServiceService } from 'src/app/services/app-service.service';
@@ -13,6 +14,9 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 export class MayoComponent implements OnInit {
 
   listMayo: Mayo [] = [];
+  page_size = 10;
+  page_index = 1;
+  pageSizeOption = [10, 25, 50, 100];
 
   constructor(private mayoService: AppServiceService, private toastr: ToastrService, public dialogo: MatDialog) { }
 
@@ -22,10 +26,12 @@ export class MayoComponent implements OnInit {
 
   obtenerVentas(){
     this.mayoService.getVentasMayo().subscribe(data =>{
-      console.log(data)
       this.listMayo = data
     }, error =>{
-      console.log(error)
+      this.toastr.error(
+        'Error al obtener los datos',
+        'Error'
+      );
     })
   }
 
@@ -49,8 +55,13 @@ export class MayoComponent implements OnInit {
       this.toastr.error('El registro fue eliminado con éxito', 'Registro Eliminado');
       this.obtenerVentas();
     }, error =>{
-      console.log(error);
+      this.toastr.error('Error al eliminar el registro', 'Error');
     })
+  }
+
+  handlePage(e: PageEvent){
+    this.page_size = e.pageSize;
+    this.page_index = e.pageIndex + 1;
   }
 
 }
